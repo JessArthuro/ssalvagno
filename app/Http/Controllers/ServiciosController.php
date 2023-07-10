@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class CotizacionesController extends Controller
+class ServiciosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class CotizacionesController extends Controller
      */
     public function index()
     {
-        return view('quotes.index');
+        return view('services.index');
     }
 
     /**
@@ -23,7 +23,7 @@ class CotizacionesController extends Controller
      */
     public function create()
     {
-        return view('quotes.create');
+        //
     }
 
     /**

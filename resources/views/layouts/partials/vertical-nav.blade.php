@@ -2,7 +2,7 @@
     <div class="nav-scroller">
         <!-- Brand logo -->
         <a class="navbar-brand" href="/">
-            <img src="./assets/images/brand/logo/logo.svg" alt="" />
+            <img src="{{ asset('./assets/images/brand/logo/logo.svg') }}" alt="" />
         </a>
         <!-- Navbar nav -->
         <ul class="navbar-nav flex-column" id="sideNavbar">
@@ -18,15 +18,27 @@
             </li>
 
             <li class="nav-item">
-                <a @if (request()->is('quotes')) class="nav-link active" @endif class="nav-link"
-                    href="{{ route('quotes.index') }}">
+                <a class="nav-link has-arrow collapsed" href="#!" data-bs-toggle="collapse"
+                    data-bs-target="#navAuthentication" aria-expanded="false" aria-controls="navAuthentication">
                     <i data-feather="dollar-sign" class="nav-icon icon-xs me-2">
-                    </i>
-                    Cotizaciones
+                    </i> Cotizaciones
                 </a>
+                <div id="navAuthentication" @if (request()->is('quotes*')) class="collapse show" @endif
+                    class="collapse" data-bs-parent="#sideNavbar">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a @if (request()->is('quotes')) class="nav-link active" @endif class="nav-link"
+                                href="{{ route('quotes.index') }}">Lista de cotizaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a @if (request()->is('quotes/create')) class="nav-link active" @endif class="nav-link"
+                                href="{{ route('quotes.create') }}">Agregar cotización</a>
+                        </li>
+                    </ul>
+                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="./pages/layout.html">
+                <a @if (request()->is('services')) class="nav-link active" @endif class="nav-link" href="{{ route('services.index') }}">
                     <i data-feather="list" class="nav-icon icon-xs me-2">
                     </i>
                     Servicios
@@ -37,23 +49,26 @@
             <li class="nav-item">
                 <div class="navbar-heading">Configuración</div>
             </li>
-           
+
             <li class="nav-item">
-                <a class="nav-link " href="./pages/layout.html">
+                <a @if (request()->is('companies*')) class="nav-link active" @endif class="nav-link"
+                    href="{{ route('companies.index') }}">
                     <i data-feather="briefcase" class="nav-icon icon-xs me-2">
                     </i>
                     Empresas
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="./pages/layout.html">
+                <a @if (request()->is('boats*')) class="nav-link active" @endif class="nav-link"
+                    href="{{ route('boats.index') }}">
                     <i data-feather="anchor" class="nav-icon icon-xs me-2">
                     </i>
                     Embarcaciones
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="./pages/layout.html">
+                <a @if (request()->is('foods*')) class="nav-link active" @endif class="nav-link"
+                    href="{{ route('foods.index') }}">
                     <i data-feather="coffee" class="nav-icon icon-xs me-2">
                     </i>
                     Alimentos
