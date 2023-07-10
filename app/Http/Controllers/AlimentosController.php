@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alimento;
 use Illuminate\Http\Request;
 
 class AlimentosController extends Controller
@@ -13,7 +14,8 @@ class AlimentosController extends Controller
      */
     public function index()
     {
-        return view('foods.index');
+        $foods = Alimento::all();
+        return view('foods.index', compact('foods'));
     }
 
     /**
@@ -23,7 +25,7 @@ class AlimentosController extends Controller
      */
     public function create()
     {
-        //
+        return view('foods.create');
     }
 
     /**
@@ -34,7 +36,9 @@ class AlimentosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $alimento = $request->all();
+        Alimento::create($request->all());
+        return redirect()->route('foods.index');
     }
 
     /**
@@ -56,7 +60,8 @@ class AlimentosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $food = Alimento::find($id);
+        return view('foods.edit', compact('food'));
     }
 
     /**
@@ -68,7 +73,11 @@ class AlimentosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $food = Alimento::find($id);
+        $data = $request->all();
+
+        $food->update($data);
+        return redirect()->route('foods.index');
     }
 
     /**

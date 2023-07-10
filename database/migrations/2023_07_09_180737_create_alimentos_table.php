@@ -15,8 +15,8 @@ class CreateAlimentosTable extends Migration
     {
         Schema::create('alimentos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('precio');
+            $table->string('nombre', 45);
+            $table->decimal('precio', 6,2);
             $table->timestamps();
         });
     }
