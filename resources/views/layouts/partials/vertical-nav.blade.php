@@ -7,17 +7,60 @@
         <!-- Navbar nav -->
         <ul class="navbar-nav flex-column" id="sideNavbar">
             <li class="nav-item">
-                <a class="nav-link has-arrow  active " href="/">
+                <a @if (request()->is('/')) class="nav-link active" @endif class="nav-link" href="/">
                     <i data-feather="home" class="nav-icon icon-xs me-2"></i> Dashboard
                 </a>
             </li>
 
-            <!-- Nav item -->
+            <!-- Titulo de la seccion -->
             <li class="nav-item">
-                <div class="navbar-heading">Layouts & Pages</div>
+                <div class="navbar-heading">Gestión de Proyectos</div>
             </li>
 
-            <!-- Nav item -->
+            <li class="nav-item">
+                <a @if (request()->is('quotes')) class="nav-link active" @endif class="nav-link"
+                    href="{{ route('quotes.index') }}">
+                    <i data-feather="dollar-sign" class="nav-icon icon-xs me-2">
+                    </i>
+                    Cotizaciones
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="./pages/layout.html">
+                    <i data-feather="list" class="nav-icon icon-xs me-2">
+                    </i>
+                    Servicios
+                </a>
+            </li>
+
+            <!-- Titulo de la seccion -->
+            <li class="nav-item">
+                <div class="navbar-heading">Configuración</div>
+            </li>
+           
+            <li class="nav-item">
+                <a class="nav-link " href="./pages/layout.html">
+                    <i data-feather="briefcase" class="nav-icon icon-xs me-2">
+                    </i>
+                    Empresas
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="./pages/layout.html">
+                    <i data-feather="anchor" class="nav-icon icon-xs me-2">
+                    </i>
+                    Embarcaciones
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="./pages/layout.html">
+                    <i data-feather="coffee" class="nav-icon icon-xs me-2">
+                    </i>
+                    Alimentos
+                </a>
+            </li>
+
+            {{-- <!-- Nav item -->
             <li class="nav-item">
                 <a class="nav-link has-arrow  collapsed " href="#!" data-bs-toggle="collapse"
                     data-bs-target="#navPages" aria-expanded="false" aria-controls="navPages">
@@ -87,15 +130,15 @@
                     </i>
                     Layouts
                 </a>
-            </li>
+            </li> --}}
 
             <!-- Nav item -->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <div class="navbar-heading">UI Components</div>
-            </li>
+            </li> --}}
 
             <!-- Nav item -->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link has-arrow " href="./docs/accordions.html">
                     <i data-feather="package" class="nav-icon icon-xs me-2">
                     </i> Components
@@ -160,10 +203,10 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> --}}
 
             <!-- Nav item -->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <div class="navbar-heading">Documentation</div>
             </li>
 
@@ -179,7 +222,7 @@
                     <i data-feather="git-pull-request" class="nav-icon icon-xs me-2">
                     </i> Changelog
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
 </nav>

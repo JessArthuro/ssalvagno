@@ -14,6 +14,7 @@
     <link href="./assets/libs/prismjs/themes/prism-okaidia.css" rel="stylesheet">
     <!-- Theme CSS -->
     <link rel="stylesheet" href="./assets/css/theme.min.css">
+    <link href="./assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <title>Homepage | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
 </head>
 
@@ -45,6 +46,11 @@
     <script src="./assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
     <!-- Theme JS -->
     <script src="./assets/js/theme.min.js"></script>
+    <!-- dataTables -->
+    <script src="./assets/libs/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="./assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="./assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="./assets/js/vendors/datatable.js"></script>
 </body>
 
 </html>
