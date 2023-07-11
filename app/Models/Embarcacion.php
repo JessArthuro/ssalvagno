@@ -10,4 +10,8 @@ class Embarcacion extends Model
     use HasFactory;
 
     protected $table = 'embarcaciones';
+
+    protected $fillable = [
+        'nombre'
+    ];
 }

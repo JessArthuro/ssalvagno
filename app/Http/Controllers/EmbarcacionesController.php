@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Embarcacion;
 use Illuminate\Http\Request;
 
 class EmbarcacionesController extends Controller
@@ -13,7 +14,8 @@ class EmbarcacionesController extends Controller
      */
     public function index()
     {
-        return view('boats.index');
+        $boats = Embarcacion::all();
+        return view('boats.index', compact('boats'));
     }
 
     /**
@@ -23,7 +25,7 @@ class EmbarcacionesController extends Controller
      */
     public function create()
     {
-        //
+        return view('boats.create');
     }
 
     /**
@@ -34,7 +36,11 @@ class EmbarcacionesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $boat = $request->validate([
+            'nombre' => 'required',
+        ]);
+        Embarcacion::create($boat);
+        return redirect()->route('boats.index');
     }
 
     /**
@@ -56,7 +62,8 @@ class EmbarcacionesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $boat = Embarcacion::find($id);
+        return view('boats.edit', compact('boat'));
     }
 
     /**
