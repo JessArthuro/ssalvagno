@@ -28,11 +28,6 @@ class AlimentosController extends Controller
         return redirect()->route('foods.index');
     }
 
-    public function show($id)
-    {
-        //
-    }
-
     public function edit($id)
     {
         $food = Alimento::find($id);

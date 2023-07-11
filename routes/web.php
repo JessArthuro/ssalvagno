@@ -24,6 +24,6 @@ Route::get('/', function () {
 
 Route::resource('quotes', CotizacionesController::class);
 Route::resource('services', ServiciosController::class);
-Route::resource('companies', EmpresasController::class);
-Route::resource('boats', EmbarcacionesController::class);
-Route::resource('foods', AlimentosController::class);
+Route::resource('companies', EmpresasController::class)->except(['show']);
+Route::resource('boats', EmbarcacionesController::class)->except(['show']);
+Route::resource('foods', AlimentosController::class)->except(['show']);

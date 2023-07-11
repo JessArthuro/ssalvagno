@@ -18,6 +18,19 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($companies as $company)
+                    <tr>
+                        <td>{{ $company->id }}</td>
+                        <td>{{ $company->nombre }}</td>
+                        <td>{{ $company->logo }}</td>
+                        <td>
+                            @include('layouts.partials.actions', [
+                                'editAction' => route('companies.edit', $company),
+                                'deleteAction' => route('companies.destroy', $company)
+                            ])
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

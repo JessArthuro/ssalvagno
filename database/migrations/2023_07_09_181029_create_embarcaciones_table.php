@@ -15,7 +15,7 @@ class CreateEmbarcacionesTable extends Migration
     {
         Schema::create('embarcaciones', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('nombre', 45);
             $table->timestamps();
         });
     }
