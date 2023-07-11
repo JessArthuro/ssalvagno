@@ -15,7 +15,7 @@
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{{ asset('./assets/css/theme.min.css') }}">
     <link href="{{ asset('./assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
-    <title>Homepage | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
+    <title>Servicios Integrales Salvagno</title>
 </head>
 
 <body class="bg-light">

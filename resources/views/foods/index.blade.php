@@ -45,11 +45,15 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <button class="dropdown-item" type="button">
-                                                <i data-feather="trash" class="nav-icon icon-xs me-1">
-                                                </i>
-                                                Eliminar
-                                            </button>
+                                            <form action="{{ route('foods.destroy', $food) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="dropdown-item" type="submit">
+                                                    <i data-feather="trash" class="nav-icon icon-xs me-1">
+                                                    </i>
+                                                    Eliminar
+                                                </button>
+                                            </form>
                                         </li>
                                     </ul>
                                 </div>
