@@ -26,38 +26,21 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($quotes as $quote)
                     <tr>
-                        <td>1</td>
-                        <td>215-2023</td>
-                        <td>Lizeydi Manzano</td>
-                        <td>Marinsa de México</td>
-                        <td>20/07/2023</td>
+                        <td>{{ $quote->id }}</td>
+                        <td>{{ $quote->num_cotizacion }}</td>
+                        <td>{{ $quote->nombre }}</td>
+                        <td>{{ $quote->empresa }}</td>
+                        <td>{{ $quote->fecha_entrega }}</td>
                         <td>
-                            <div class="btn-group dropstart">
-                                <button class="btn rounded-circle btn-icon btn-sm dropdown-toggle" type="button"
-                                    id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false"
-                                    style="box-shadow: none;">
-                                    <i data-feather="more-vertical" class="icon-xs"></i>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                                    <li><button class="dropdown-item" type="button">Action</button></li>
-                                    <li><button class="dropdown-item" type="button">Another action</button></li>
-                                    <li><button class="dropdown-item" type="button">Something else here</button></li>
-                                </ul>
-                            </div>
+                            @include('layouts.partials.actions', [
+                                'editAction' => route('quotes.edit', $quote),
+                                'deleteAction' => route('quotes.destroy', $quote)
+                            ])
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>218-2023</td>
-                        <td>Cristhel Baños Hernandez</td>
-                        <td>Marinsa de México</td>
-                        <td>25/07/2023</td>
-                        <td><button class="btn btn-ghost btn-icon btn-sm rounded-circle">
-                                <i data-feather="more-vertical" class="nav-icon icon-xs">
-                                </i>
-                            </button></td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

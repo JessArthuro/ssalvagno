@@ -5,45 +5,51 @@
 
     <div class="card">
         <div class="card-body">
-            <form class="row g-3">
+            <form action="{{ route('quotes.store') }}" method="POST" class="row g-3">
+                @csrf
                 <div class="col-md-4">
                     <label for="date" class="form-label">Fecha</label>
-                    <input type="date" class="form-control" id="date">
+                    <input name="fecha" value="{{ date('Y-m-d') }}" type="date" class="form-control" id="date">
                 </div>
 
                 <div class="col-md-4">
                     <label for="quoteNum" class="form-label">No. Cotización</label>
-                    <input type="text" class="form-control" id="quoteNum">
+                    <input name="num_cotizacion" type="text" class="form-control" id="quoteNum">
                 </div>
 
                 <div class="col-md-4">
                     <label for="numOrder" class="form-label">No. Orden</label>
-                    <input type="text" class="form-control" id="numOrder">
+                    <input name="num_orden" type="text" class="form-control" id="numOrder">
                 </div>
 
                 <div class="col-md-6">
                     <label for="name" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="name">
+                    <input name="nombre" type="text" class="form-control" id="name">
                 </div>
 
                 <div class="col-md-6">
                     <label for="company" class="form-label">Empresa</label>
-                    <input type="text" class="form-control" id="company">
+                    <select name="empresa" id="company" class="form-control">
+                        <option selected disabled>Selecciona una opción...</option>
+                        @foreach ($companies as $company)
+                            <option value="{{ $company->id }}">{{ $company->nombre }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="col-md-3">
                     <label for="deliveryDate" class="form-label">Fecha de Entrega</label>
-                    <input type="date" class="form-control" id="deliveryDate">
+                    <input name="fecha_entrega" type="date" class="form-control" id="deliveryDate">
                 </div>
 
                 <div class="col-md-3">
                     <label for="deliveryTime" class="form-label">Hora de Entrega</label>
-                    <input type="time" class="form-control" id="deliveryTime">
+                    <input name="hora_entrega" type="time" class="form-control" id="deliveryTime">
                 </div>
 
                 <div class="col-md-6">
                     <label for="deliveryPlace" class="form-label">Lugar de Entrega</label>
-                    <input type="text" class="form-control" id="deliveryPlace">
+                    <input name="lugar_entrega" type="text" class="form-control" id="deliveryPlace">
                 </div>
 
                 <div class="col-12 mt-5">

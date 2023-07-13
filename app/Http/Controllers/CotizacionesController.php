@@ -2,23 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cotizacion;
+use App\Models\Empresa;
 use Illuminate\Http\Request;
 
 class CotizacionesController extends Controller
 {
     public function index()
     {
-        return view('quotes.index');
+        $quotes = Cotizacion::all();
+        return view('quotes.index', compact('quotes'));
     }
 
     public function create()
     {
-        return view('quotes.create');
+        $companies = Empresa::all();
+        return view('quotes.create', compact('companies'));
     }
 
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     public function show($id)
