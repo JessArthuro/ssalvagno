@@ -14,7 +14,7 @@
 
                 <div class="col-md-4">
                     <label for="quoteNum" class="form-label">No. Cotización</label>
-                    <input name="num_cotizacion" type="text" class="form-control" id="quoteNum">
+                    <input name="num_cotizacion" value="{{ old('num_cotizacion', $folio) }}" type="text" class="form-control" id="quoteNum">
                 </div>
 
                 <div class="col-md-4">
@@ -29,7 +29,7 @@
 
                 <div class="col-md-6">
                     <label for="company" class="form-label">Empresa</label>
-                    <select name="empresa" id="company" class="form-control">
+                    <select name="empresa_id" id="company" class="form-control">
                         <option selected disabled>Selecciona una opción...</option>
                         @foreach ($companies as $company)
                             <option value="{{ $company->id }}">{{ $company->nombre }}</option>

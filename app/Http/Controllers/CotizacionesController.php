@@ -16,13 +16,19 @@ class CotizacionesController extends Controller
 
     public function create()
     {
+        $quote = new Cotizacion();
+        $folio = $quote->generateFolio();
+        // session()->flashInput(['num_cotizacion' => $quote->num_cotizacion]);
+
         $companies = Empresa::all();
-        return view('quotes.create', compact('companies'));
+        return view('quotes.create', compact('quote', 'companies', 'folio'));
     }
 
     public function store(Request $request)
     {
-        dd($request->all());
+        $data = $request->all();
+        Cotizacion::create($data);
+        return redirect()->route('quotes.index');
     }
 
     public function show($id)

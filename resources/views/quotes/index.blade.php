@@ -30,9 +30,9 @@
                     <tr>
                         <td>{{ $quote->id }}</td>
                         <td>{{ $quote->num_cotizacion }}</td>
-                        <td>{{ $quote->nombre }}</td>
-                        <td>{{ $quote->empresa }}</td>
-                        <td>{{ $quote->fecha_entrega }}</td>
+                        <td class="text-capitalize">{{ $quote->nombre }}</td>
+                        <td class="text-capitalize">{{ $quote->empresa->nombre }}</td>
+                        <td>{{ date('d/m/Y', strtotime($quote->fecha_entrega)) }}</td>
                         <td>
                             @include('layouts.partials.actions', [
                                 'editAction' => route('quotes.edit', $quote),
