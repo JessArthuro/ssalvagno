@@ -15,8 +15,10 @@ class CreateServiciosTable extends Migration
     {
         Schema::create('servicios', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('cotizacion_id')->nullable();
+            $table->foreign('cotizacion_id')->references('id')->on('cotizaciones')->onUpdate('cascade')->onDelete('cascade');
             $table->string('servicio');
-            $table->date('fecha');
+            $table->date('fecha_serv');
             $table->string('huesped');
             $table->string('cantidad');
             $table->string('precio_unitario');

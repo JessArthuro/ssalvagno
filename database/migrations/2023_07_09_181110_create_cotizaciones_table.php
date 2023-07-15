@@ -15,15 +15,15 @@ class CreateCotizacionesTable extends Migration
     {
         Schema::create('cotizaciones', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha');
+            $table->date('fecha_cot');
             $table->string('num_cotizacion', 15);
             $table->string('num_orden', 45)->nullable();
             $table->string('nombre', 60);
             $table->unsignedBigInteger('empresa_id');
             $table->foreign('empresa_id')->references('id')->on('empresas')->onUpdate('cascade')->onDelete('cascade');
-            $table->date('fecha_entrega');
-            $table->time('hora_entrega');
-            $table->string('lugar_entrega', 100);
+            $table->date('fecha_ent');
+            $table->time('hora_ent');
+            $table->string('lugar_ent', 100);
             $table->timestamps();
         });
     }

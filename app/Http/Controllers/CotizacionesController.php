@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cotizacion;
 use App\Models\Empresa;
+use App\Models\Servicio;
 use Illuminate\Http\Request;
 
 class CotizacionesController extends Controller
@@ -27,7 +28,22 @@ class CotizacionesController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        Cotizacion::create($data);
+        $cotizacion = Cotizacion::create($data);
+
+        $servicesData = $request->input('servicios', []);
+
+        foreach ($servicesData as $servData) {
+            $service = new Servicio();
+            $service->servicio = $servData['servicio'];
+            $service->fecha_serv = $servData['fecha_serv'];
+            $service->huesped = $servData['huesped'];
+            $service->cantidad = $servData['cantidad'];
+            $service->precio_unitario = $servData['precio_unitario'];
+            $service->total = $servData['total'];
+
+            $cotizacion->servicios()->save($service);
+        }
+
         return redirect()->route('quotes.index');
     }
 

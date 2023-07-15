@@ -51,6 +51,7 @@
     <script src="{{ asset('./assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
     <script src="{{ asset('./assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('./assets/js/vendors/datatable.js') }}"></script>
+    @yield('js')
 </body>
 
 </html>

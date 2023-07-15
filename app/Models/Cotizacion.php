@@ -12,7 +12,7 @@ class Cotizacion extends Model
     protected $table = 'cotizaciones';
 
     protected $fillable = [
-        'fecha', 'num_cotizacion', 'num_orden', 'nombre', 'empresa_id', 'fecha_entrega', 'hora_entrega', 'lugar_entrega',
+        'fecha_cot', 'num_cotizacion', 'num_orden', 'nombre', 'empresa_id', 'fecha_ent', 'hora_ent', 'lugar_ent',
     ];
 
     public function generateFolio()
@@ -35,5 +35,10 @@ class Cotizacion extends Model
     public function empresa()
     {
         return $this->belongsTo(Empresa::class);
+    }
+
+    public function servicios()
+    {
+        return $this->hasMany(Servicio::class);
     }
 }
