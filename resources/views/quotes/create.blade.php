@@ -1,5 +1,13 @@
 @extends('layouts.master')
 
+@section('css')
+    <style>
+        .select2-container--bootstrap4 .select2-selection--multiple {
+            min-height: calc(1.75em + 0.75rem + 2px) !important;
+        }
+    </style>
+@endsection
+
 @section('content')
     <form action="{{ route('quotes.store') }}" method="POST">
         @csrf
@@ -77,8 +85,13 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="service" class="form-label">Servicio</label>
-                                        <input name="servicios[0][servicio]" type="text" class="form-control"
-                                            id="service">
+                                        <select name="servicios[0][servicio][]" id="service" class="form-control select_a"
+                                            multiple onchange="updateUnitPrice()">
+                                            @foreach ($foods as $food)
+                                                <option value="{{ $food->id }}" id="food_{{ $food->id }}"
+                                                    data-price="{{ $food->precio }}">{{ $food->nombre }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="dateService" class="form-label">Fecha</label>
@@ -87,7 +100,12 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="boat" class="form-label">Embarcación</label>
-                                        <input type="text" class="form-control" id="boat">
+                                        <select name="servicios[0][embarcacion_id]" id="boat" class="form-control">
+                                            <option selected disabled>Selecciona una opción...</option>
+                                            @foreach ($boats as $boat)
+                                                <option value="{{ $boat->id }}">{{ $boat->nombre }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="host" class="form-label">Huesped</label>
@@ -96,13 +114,13 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label for="quantity" class="form-label">Cantidad</label>
-                                        <input name="servicios[0][cantidad]" type="text" class="form-control"
-                                            id="quantity">
+                                        <input name="servicios[0][cantidad]" type="number" value="1"
+                                            min="1" class="form-control" id="quantity" onchange="updateTotal()">
                                     </div>
                                     <div class="col-md-2">
                                         <label for="unitPrice" class="form-label">Precio Unitario</label>
-                                        <input name="servicios[0][precio_unitario]" type="text" class="form-control"
-                                            id="unitPrice">
+                                        <input name="servicios[0][precio_unitario]" type="text" placeholder="0.00"
+                                            class="form-control" id="unitPrice" readonly onchange="updateTotal()">
                                     </div>
                                     <div class="col-md-2">
                                         <label for="total" class="form-label">Total</label>
@@ -128,7 +146,7 @@
             <div class="col-12 d-flex flex-wrap gap-2">
                 <button class="btn btn-primary" type="submit">Crear Cotización</button>
                 <div class="vr"></div>
-                <a href="{{ route('quotes.index') }}" class="btn btn-secondary">Cancelar</a>
+                <a href="{{ route('quotes.index') }}" class="btn btn-outline-secondary">Cancelar</a>
             </div>
         </div>
     </form>
@@ -136,8 +154,58 @@
 
 @section('js')
     <script>
+        $('.select_a').select2({
+            theme: "bootstrap4",
+            placeholder: "",
+            allowClear: true,
+        });
+
+        // Funciones para calcular el precio unitario y total de los servicios
+        document.addEventListener('DOMContentLoaded', function() {
+            updateUnitPrice();
+            updateTotal();
+        });
+
+        function updateUnitPrice() {
+            let opcionesSeleccionadas = document.querySelectorAll('#service option:checked');
+            let precioUnitario = 0;
+
+            for (let i = 0; i < opcionesSeleccionadas.length; i++) {
+                let opcion = opcionesSeleccionadas[i].getAttribute('data-price');
+                precioUnitario += parseFloat(opcion);
+            }
+
+            document.getElementById('unitPrice').value = precioUnitario.toFixed(2);
+            updateTotal();
+        }
+
+        function updateTotal() {
+            let cantidad = parseInt(document.getElementById('quantity').value);
+            let precioUnitario = parseFloat(document.getElementById('unitPrice').value);
+            let total = cantidad * precioUnitario;
+
+            document.getElementById('total').value = total.toFixed(2);
+        }
+
         $(document).ready(function() {
             let rowCount = 2;
+
+            // Funcion para actualizar el precio unitario y total
+            function updateUnitPriceAndTotal(rowIndex) {
+                let quantity = parseInt($(`#quantity_${rowIndex}`).val()) || 0;
+                let unitPrice = 0;
+
+                $(`#service${rowIndex} option:selected`).each(function() {
+                    unitPrice += parseFloat($(this).data('price')) || 0;
+                });
+
+                $(`#unitPrice_${rowIndex}`).val(unitPrice.toFixed(2) || 0);
+
+                let total = quantity * unitPrice;
+                $(`#total_${rowIndex}`).val(total.toFixed(2)) || 0;
+            }
+
+            // Funcion para agregar una nueva fila de servicios de manera dinamica
             $('#addRowBtn').click(function() {
                 let newService = `
                 <div class="col-12 mt-5">
@@ -148,8 +216,13 @@
                         </div>
                         <div class="col-md-4">
                             <label for="service" class="form-label">Servicio</label>
-                            <input name="servicios[${rowCount}][servicio]" type="text" class="form-control"
-                                id="service">
+                            <select name="servicios[${rowCount}][servicio][]"
+                                        class="form-control dynamic-select" id="service${rowCount}" multiple>
+                                @foreach ($foods as $food)
+                                    <option value="{{ $food->id }}" id="food_${rowCount}_{{ $food->id }}"
+                                        data-price="{{ $food->precio }}">{{ $food->nombre }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-md-3">
                             <label for="dateService" class="form-label">Fecha</label>
@@ -158,7 +231,12 @@
                         </div>
                         <div class="col-md-4">
                             <label for="boat" class="form-label">Embarcación</label>
-                            <input type="text" class="form-control" id="boat">
+                            <select name="servicios[${rowCount}][embarcacion_id]" id="boat" class="form-control">
+                                <option selected disabled>Selecciona una opción...</option>
+                                @foreach ($boats as $boat)
+                                    <option value="{{ $boat->id }}">{{ $boat->nombre }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-md-4">
                             <label for="host" class="form-label">Huesped</label>
@@ -167,18 +245,18 @@
                         </div>
                         <div class="col-md-2">
                             <label for="quantity" class="form-label">Cantidad</label>
-                            <input name="servicios[${rowCount}][cantidad]" type="text" class="form-control"
-                                id="quantity">
+                            <input name="servicios[${rowCount}][cantidad]" type="number" min="1" value="1" class="form-control"
+                                id="quantity_${rowCount}">
                         </div>
                         <div class="col-md-2">
                             <label for="unitPrice" class="form-label">Precio Unitario</label>
                             <input name="servicios[${rowCount}][precio_unitario]" type="text" class="form-control"
-                                id="unitPrice">
+                                id="unitPrice_${rowCount}">
                         </div>
                         <div class="col-md-2">
                             <label for="total" class="form-label">Total</label>
                             <input name="servicios[${rowCount}][total]" type="text" class="form-control"
-                                id="total">
+                                id="total_${rowCount}">
                         </div>
                         <div class="col-md-2 d-grid align-items-end">
                             <button type="button" class="btn btn-outline-danger btn-eliminar">Remover</button>
@@ -186,80 +264,53 @@
                     </div>
                 </div>
                 `;
+
                 $('#serviciosContainer').append(newService);
+
+                let currentRowCount = rowCount;
+
+                // Inicializar el plugin Select2
+                initializeSelect2(currentRowCount);
+
+                // Asignar evento onchange a los inputs de cantidad y precio unitario
+                $(`#quantity_${currentRowCount}`).on('change', function() {
+                    updateUnitPriceAndTotal(currentRowCount);
+                });
+
+                $(`#unitPrice_${currentRowCount}`).on('change', function() {
+                    updateUnitPriceAndTotal(currentRowCount);
+                });
+
+                // Actualizar el precio unitario y el total al agregar una nueva fila
+                updateUnitPriceAndTotal(currentRowCount);
                 rowCount++;
             });
 
+            function initializeSelect2(rowIndex) {
+                $(`#service${rowIndex}`).select2({
+                    theme: "bootstrap4",
+                    placeholder: "",
+                    allowClear: true,
+                }).on('change', function() {
+                    updateUnitPriceAndTotal(rowIndex);
+                });
+            }
+
+            // Funcion para eliminar una fila de servicios
             $(document).on('click', '.btn-eliminar', function() {
                 $(this).closest('.col-12').remove();
                 rowCount = 2;
                 actualizarNumerosID();
+                initializeSelect2(rowCount - 1);
             });
 
-            function actualizarNumerosID(){
+            // Funcion para actualizar los numeros de ID despues de eliminar una fila
+            function actualizarNumerosID() {
                 let idInputs = $('#serviciosContainer').find('input[id="num"]');
-                idInputs.each(function(index, input){
+                idInputs.each(function(index, input) {
                     $(input).val(index + 2);
                 });
             }
         });
-
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     let addRowBtn = document.getElementById('addRowBtn');
-        //     let serviciosContainer = document.getElementById('serviciosContainer');
-        //     let rowCount = 2;
-
-        //     addRowBtn.addEventListener('click', function() {
-        //         let servicioRow = document.createElement('div');
-        //         servicioRow.classList.add('row', 'border');
-
-        //         servicioRow.innerHTML = `
-    //             <div class="col-md-1">
-    //                 <label for="id" class="form-label">ID</label>
-    //                 <input type="text" value="${rowCount}" class="form-control" id="id" readonly>
-    //             </div>
-    //             <div class="col-md-4">
-    //                 <label for="service" class="form-label">Servicio</label>
-    //                 <input name="servicios[${rowCount}][servicio]" type="text" class="form-control">
-    //             </div>
-    //             <div class="col-md-3">
-    //                 <label for="dateService" class="form-label">Fecha</label>
-    //                 <input name="servicios[${rowCount}][fecha_serv]" type="date" class="form-control">
-    //             </div>
-    //             <div class="col-md-4">
-    //                 <label class="form-label">Embarcación</label>
-    //                 <input type="text" class="form-control">
-    //             </div>
-    //             <div class="col-md-5">
-    //                 <label for="host" class="form-label">Huesped</label>
-    //                 <input name="servicios[${rowCount}][huesped]" type="text" class="form-control">
-    //             </div>
-    //             <div class="col-md-2">
-    //                 <label for="quantity" class="form-label">Cantidad</label>
-    //                 <input name="servicios[${rowCount}][cantidad]" type="text" class="form-control"> 
-    //             </div>
-    //             <div class="col-md-2">
-    //                 <label for="unitPrice" class="form-label">Precio Unitario</label>
-    //                 <input name="servicios[${rowCount}][precio_unitario]" type="text" class="form-control">    
-    //             </div>
-    //             <div class="col-md-2">
-    //                 <label for="total" class="form-label">Total</label>
-    //                 <input name="servicios[${rowCount}][total]" type="text" class="form-control">     
-    //             </div>
-    //             <div class="col-md-1">
-    //                 <label class="form-label"></label>
-    //                 <button class="btn btn-danger" type="button" onclick="eliminarFila(this)">X</button>
-    //             </div>
-    //         `;
-
-        //         serviciosContainer.appendChild(servicioRow);
-        //         rowCount++;
-        //     });
-
-        //     function eliminarFila(btnEliminar) {
-        //         let fila = btnEliminar.closest('.row');
-        //         fila.remove();
-        //     }
-        // });
     </script>
 @endsection

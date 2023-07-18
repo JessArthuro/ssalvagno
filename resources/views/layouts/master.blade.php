@@ -12,9 +12,15 @@
     <link href="{{ asset('./assets/libs/dropzone/dist/dropzone.css') }}" rel="stylesheet">
     <link href="{{ asset('./assets/libs/@mdi/font/css/materialdesignicons.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('./assets/libs/prismjs/themes/prism-okaidia.css') }}" rel="stylesheet">
+    <!-- Select 2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"
+        integrity="sha256-FdatTf20PQr/rWg+cAKfl6j4/IY3oohFAJ7gVC3M34E=" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css">
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="{{ asset('./assets/css/theme.min.css') }}">
     <link href="{{ asset('./assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('./assets/css/theme.min.css') }}">
+    @yield('css')
     <title>Servicios Integrales Salvagno</title>
 </head>
 
@@ -44,6 +50,9 @@
     <script src="{{ asset('./assets/libs/dropzone/dist/min/dropzone.min.js') }}"></script>
     <script src="{{ asset('./assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js') }}"></script>
     <script src="{{ asset('./assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"
+        integrity="sha256-AFAYEOkzB6iIKnTYZOdUf9FFje6lOTYdwRJKwTN5mks=" crossorigin="anonymous"></script>
+
     <!-- Theme JS -->
     <script src="{{ asset('./assets/js/theme.min.js') }}"></script>
     <!-- dataTables -->

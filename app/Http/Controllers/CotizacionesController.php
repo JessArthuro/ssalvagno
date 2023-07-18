@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alimento;
 use App\Models\Cotizacion;
+use App\Models\Embarcacion;
 use App\Models\Empresa;
 use App\Models\Servicio;
 use Illuminate\Http\Request;
@@ -19,22 +21,26 @@ class CotizacionesController extends Controller
     {
         $quote = new Cotizacion();
         $folio = $quote->generateFolio();
-        // session()->flashInput(['num_cotizacion' => $quote->num_cotizacion]);
 
         $companies = Empresa::all();
-        return view('quotes.create', compact('quote', 'companies', 'folio'));
+        $boats = Embarcacion::all();
+        $foods = Alimento::all();
+        return view('quotes.create', compact('quote', 'companies', 'folio', 'boats', 'foods'));
     }
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $data = $request->all();
         $cotizacion = Cotizacion::create($data);
 
         $servicesData = $request->input('servicios', []);
+        // $empleado['dias_acceso'] = serialize($empleado['dias_acceso']);
 
         foreach ($servicesData as $servData) {
             $service = new Servicio();
-            $service->servicio = $servData['servicio'];
+            // $service->servicio = $servData['servicio'];
+            $service->servicio = serialize($servData['servicio']);
             $service->fecha_serv = $servData['fecha_serv'];
             $service->huesped = $servData['huesped'];
             $service->cantidad = $servData['cantidad'];

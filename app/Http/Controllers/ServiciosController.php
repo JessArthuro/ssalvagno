@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Servicio;
 use Illuminate\Http\Request;
 
 class ServiciosController extends Controller
 {
     public function index()
     {
-        return view('services.index');
+        $services = Servicio::all();
+        return view('services.index', compact('services'));
     }
 
     public function create()

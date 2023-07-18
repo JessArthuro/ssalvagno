@@ -11,6 +11,7 @@
             <thead>
                 <tr class="table-dark">
                     <th class="text-light text-center">ID</th>
+                    <th class="text-light text-center">Cotizacion</th>
                     <th class="text-light text-center">Servicio</th>
                     <th class="text-light text-center">Huesped</th>
                     <th class="text-light text-center">Total</th>
@@ -18,6 +19,16 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($services as $service)
+                    <tr>
+                        <td>{{ $service->id }}</td>
+                        <td>{{ $service->cotizacion_id }}</td>
+                        <td>{{ $service->servicio }}</td>
+                        <td>{{ $service->huesped }}</td>
+                        <td>{{ $service->total }}</td>
+                        <td></td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
