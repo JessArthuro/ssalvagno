@@ -55,7 +55,8 @@ class CotizacionesController extends Controller
 
     public function show($id)
     {
-        //
+        $quote = Cotizacion::find($id);
+        return view('quotes.show', compact('quote'));
     }
 
     public function edit($id)

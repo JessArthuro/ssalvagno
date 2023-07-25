@@ -13,20 +13,26 @@
                     <th class="text-light text-center">ID</th>
                     <th class="text-light text-center">Cotizacion</th>
                     <th class="text-light text-center">Servicio</th>
+                    <th class="text-light text-center">Fecha del Servicio</th>
                     <th class="text-light text-center">Huesped</th>
                     <th class="text-light text-center">Total</th>
-                    <th class="text-light text-center">Opciones</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($services as $service)
                     <tr>
                         <td>{{ $service->id }}</td>
-                        <td>{{ $service->cotizacion_id }}</td>
-                        <td>{{ $service->servicio }}</td>
-                        <td>{{ $service->huesped }}</td>
+                        <td>{{ $service->cotizacion->num_cotizacion }}</td>
+                        <td>
+                            <ul class="list-unstyled">
+                                @foreach ($service->servicio as $serv)
+                                    <li>{{ $serv }}</li>
+                                @endforeach
+                            </ul>
+                        </td>
+                        <td>{{ date('d-m-Y', strtotime($service->fecha_serv)) }}</td>
+                        <td class="text-capitalize">{{ $service->huesped }}</td>
                         <td>{{ $service->total }}</td>
-                        <td></td>
                     </tr>
                 @endforeach
             </tbody>

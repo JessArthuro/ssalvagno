@@ -295,13 +295,21 @@
                     updateUnitPriceAndTotal(rowIndex);
                 });
             }
+            // rowCount = 2;
+            // rowCount = currentRowCount - rowIndex;
 
             // Funcion para eliminar una fila de servicios
             $(document).on('click', '.btn-eliminar', function() {
                 $(this).closest('.col-12').remove();
-                rowCount = 2;
+                rowCount--;
                 actualizarNumerosID();
-                initializeSelect2(rowCount - 1);
+                // initializeSelect2(rowCount - rowIndex);
+
+                $('#serviciosContainer').find('.col-12').each(function(index){
+                    let currentRowCount = index + 1;
+                    $(this).find('.dynamic-select').attr('id', `service${currentRowCount}`);
+                    initializeSelect2(currentRowCount);
+                });
             });
 
             // Funcion para actualizar los numeros de ID despues de eliminar una fila

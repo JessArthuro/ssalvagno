@@ -10,6 +10,15 @@
         <i data-feather="more-vertical" class="icon-xs"></i>
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+        @if (isset($showAction))
+            <li>
+                <a href="{{ $showAction }}" class="dropdown-item">
+                    <i data-feather="eye" class="nav-icon icon-xs me-1">
+                    </i>
+                    Ver
+                </a>
+            </li>
+        @endif
         @if (isset($editAction))
             <li>
                 <a href="{{ $editAction }}" class="dropdown-item">

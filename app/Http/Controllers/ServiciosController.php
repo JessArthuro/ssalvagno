@@ -10,6 +10,12 @@ class ServiciosController extends Controller
     public function index()
     {
         $services = Servicio::all();
+        // $services['servicio'] = unserialize($services['servicio']);
+
+        // $services = Servicio::all()->map(function ($service){
+        //     $service->servicio = unserialize($service->servicio);
+        //     return $service;
+        // });
         return view('services.index', compact('services'));
     }
 

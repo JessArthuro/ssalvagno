@@ -17,4 +17,11 @@ class Servicio extends Model
     {
         return $this->belongsTo(Cotizacion::class);
     }
+
+    public function getServicioAttribute($value)
+    {
+        $ids = unserialize($value);
+        $alimentos = Alimento::whereIn('id', $ids)->pluck('nombre')->all();
+        return $alimentos;
+    }
 }

@@ -32,9 +32,10 @@
                         <td>{{ $quote->num_cotizacion }}</td>
                         <td class="text-capitalize">{{ $quote->nombre }}</td>
                         <td class="text-capitalize">{{ $quote->empresa->nombre }}</td>
-                        <td>{{ date('d/m/Y', strtotime($quote->fecha_entrega)) }}</td>
+                        <td>{{ date('d-m-Y', strtotime($quote->fecha_ent)) }}</td>
                         <td>
                             @include('layouts.partials.actions', [
+                                'showAction' => route('quotes.show', $quote),
                                 'editAction' => route('quotes.edit', $quote),
                                 'deleteAction' => route('quotes.destroy', $quote)
                             ])
