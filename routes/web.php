@@ -23,6 +23,7 @@ Route::get('/', function () {
 });
 
 Route::resource('quotes', CotizacionesController::class);
+Route::get('quotes/pdf/{quote}', [CotizacionesController::class, 'pdf'])->name('generate_pdf');
 Route::resource('services', ServiciosController::class);
 Route::resource('companies', EmpresasController::class)->except(['show']);
 Route::resource('boats', EmbarcacionesController::class)->except(['show']);

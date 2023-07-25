@@ -36,8 +36,8 @@
                         <td>
                             @include('layouts.partials.actions', [
                                 'showAction' => route('quotes.show', $quote),
-                                'editAction' => route('quotes.edit', $quote),
-                                'deleteAction' => route('quotes.destroy', $quote)
+                                // 'editAction' => route('quotes.edit', $quote),
+                                // 'deleteAction' => route('quotes.destroy', $quote)
                             ])
                         </td>
                     </tr>

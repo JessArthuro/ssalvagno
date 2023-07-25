@@ -8,6 +8,7 @@ use App\Models\Embarcacion;
 use App\Models\Empresa;
 use App\Models\Servicio;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CotizacionesController extends Controller
 {
@@ -72,5 +73,12 @@ class CotizacionesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function pdf($id)
+    {
+        $quote = Cotizacion::find($id);
+        $pdf = Pdf::loadView('quotes.pdf', compact('quote'));
+        return $pdf->stream();
     }
 }
