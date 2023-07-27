@@ -1,13 +1,21 @@
 @extends('layouts.master')
 
 @section('content')
-    <section class="mt-3 mb-6">
-        <div class="d-flex gap-2 flex-wrap mb-3">
-            <a href="{{ route('quotes.index') }}" class="btn btn-secondary"><i data-feather="arrow-left"
+    <section class="mb-6">
+        <a href="{{ route('quotes.index') }}" class="text-secondary"><i data-feather="arrow-left" class="nav-icon icon-sm">
+            </i></a>
+
+        <div class="d-flex gap-2 flex-wrap my-3">
+            <a href="{{ route('generate_pdf', $quote) }}" class="btn btn-danger" target="_blank"><i data-feather="file-text"
                     class="nav-icon icon-xs">
-                </i> Volver</a>
-            <a href="{{ route('generate_pdf', $quote) }}" class="btn btn-outline-danger" target="_blank">Generar PDF</a>
-            <a href="#" class="btn btn-outline-success">Generar Excel</a>
+                </i> Generar PDF</a>
+
+            <form action="{{ route('generate_excel') }}" method="POST">
+                @csrf
+                <input type="hidden" name="id" value="{{ $quote->id }}">
+                <button type="submit" class="btn btn-success"><i data-feather="layout" class="nav-icon icon-xs">
+                    </i> Generar Excel</button>
+            </form>
         </div>
 
         <table class="table table-borderless">

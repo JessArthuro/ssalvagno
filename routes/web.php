@@ -24,6 +24,7 @@ Route::get('/', function () {
 
 Route::resource('quotes', CotizacionesController::class);
 Route::get('quotes/pdf/{quote}', [CotizacionesController::class, 'pdf'])->name('generate_pdf');
+Route::post('quotes/excel', [CotizacionesController::class, 'excel'])->name('generate_excel');
 Route::resource('services', ServiciosController::class);
 Route::resource('companies', EmpresasController::class)->except(['show']);
 Route::resource('boats', EmbarcacionesController::class)->except(['show']);

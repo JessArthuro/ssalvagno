@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CotizacionesExport;
 use App\Models\Alimento;
 use App\Models\Cotizacion;
 use App\Models\Embarcacion;
@@ -9,6 +10,7 @@ use App\Models\Empresa;
 use App\Models\Servicio;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CotizacionesController extends Controller
 {
@@ -79,6 +81,15 @@ class CotizacionesController extends Controller
     {
         $quote = Cotizacion::find($id);
         $pdf = Pdf::loadView('quotes.pdf', compact('quote'));
-        return $pdf->stream();
+        $filename = "Cotizacion_" . $quote->num_cotizacion . ".pdf";
+        return $pdf->stream($filename);
+    }
+
+    public function excel(Request $request)
+    {
+        $id = $request->input('id');
+
+        $quote = Cotizacion::with('servicios')->find($id);
+        return Excel::download(new CotizacionesExport($quote), 'cotizacion.xlsx');
     }
 }
