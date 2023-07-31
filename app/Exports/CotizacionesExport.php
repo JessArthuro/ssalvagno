@@ -7,8 +7,10 @@ use Illuminate\Contracts\View\View;
 // use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class CotizacionesExport implements FromView, ShouldAutoSize
+class CotizacionesExport implements FromView, ShouldAutoSize, WithStyles
 {
     protected $quote;
     protected $services;
@@ -25,5 +27,24 @@ class CotizacionesExport implements FromView, ShouldAutoSize
             'quote' => $this->quote,
             'services' => $this->services
         ]);
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+        return [
+            'B2' => [
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                ],
+                'font' => [
+                    'size' => 18,
+                ],
+            ],
+            // 'td.subtotal-cell' => [
+            //     'alignment' => [
+            //         'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+            //     ],
+            // ],
+        ];
     }
 }

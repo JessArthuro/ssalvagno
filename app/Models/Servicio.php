@@ -10,12 +10,22 @@ class Servicio extends Model
     use HasFactory;
 
     protected $fillable = [
-        'cotizacion_id', 'servicio', 'fecha_serv', 'huesped', 'cantidad', 'precio_unitario', 'total'
+        'cotizacion_id', 'alimentos_ids', 'fecha_serv', 'cantidad', 'precio_unitario', 'total', 'costo_envio'
     ];
 
     public function cotizacion()
     {
         return $this->belongsTo(Cotizacion::class);
+    }
+
+    public function embarcacion()
+    {
+        return $this->belongsTo(Embarcacion::class);
+    }
+
+    public function huespedes()
+    {
+        return $this->hasMany(Huesped::class);
     }
 
     public function getServicioAttribute($value)

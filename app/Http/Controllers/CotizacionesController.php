@@ -7,6 +7,7 @@ use App\Models\Alimento;
 use App\Models\Cotizacion;
 use App\Models\Embarcacion;
 use App\Models\Empresa;
+use App\Models\Huesped;
 use App\Models\Servicio;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -42,15 +43,28 @@ class CotizacionesController extends Controller
 
         foreach ($servicesData as $servData) {
             $service = new Servicio();
-            // $service->servicio = $servData['servicio'];
-            $service->servicio = serialize($servData['servicio']);
+            // $service->alimentos_ids = serialize($servData['alimentos_ids']);
+            $service->alimentos_ids = json_encode($servData['alimentos_ids']);
             $service->fecha_serv = $servData['fecha_serv'];
-            $service->huesped = $servData['huesped'];
             $service->cantidad = $servData['cantidad'];
             $service->precio_unitario = $servData['precio_unitario'];
             $service->total = $servData['total'];
+            $service->costo_envio = $servData['costo_envio'];
 
             $cotizacion->servicios()->save($service);
+        }
+
+        $guestsData = $request->input('huespedes', []);
+
+        foreach ($guestsData as $guestData) {
+            $guest = new Huesped();
+            $guest->nombre = $guestData['nombre']; 
+            $guest->desayunos = $guestData['desayunos']; 
+            $guest->comidas = $guestData['comidas']; 
+            $guest->cenas = $guestData['cenas']; 
+            $guest->embarcacion_id = $guestData['embarcacion_id']; 
+
+            $service->huespedes()->save($guest);
         }
 
         return redirect()->route('quotes.index');
@@ -90,6 +104,7 @@ class CotizacionesController extends Controller
         $id = $request->input('id');
 
         $quote = Cotizacion::with('servicios')->find($id);
-        return Excel::download(new CotizacionesExport($quote), 'cotizacion.xlsx');
+        $filename = "Cotizacion_" . $quote->num_cotizacion . ".xlsx";
+        return Excel::download(new CotizacionesExport($quote), $filename);
     }
 }

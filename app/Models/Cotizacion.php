@@ -12,7 +12,7 @@ class Cotizacion extends Model
     protected $table = 'cotizaciones';
 
     protected $fillable = [
-        'fecha_cot', 'num_cotizacion', 'num_orden', 'nombre', 'empresa_id', 'fecha_ent', 'hora_ent', 'lugar_ent',
+        'fecha_cot', 'num_cotizacion', 'num_orden', 'nombre', 'empresa_id', 'fecha_ent', 'hora_ent', 'fecha_sal', 'lugar_ent',
     ];
 
     public function generateFolio()

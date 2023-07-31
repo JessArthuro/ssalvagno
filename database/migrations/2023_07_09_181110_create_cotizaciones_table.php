@@ -23,6 +23,7 @@ class CreateCotizacionesTable extends Migration
             $table->foreign('empresa_id')->references('id')->on('empresas')->onUpdate('cascade')->onDelete('cascade');
             $table->date('fecha_ent');
             $table->time('hora_ent');
+            $table->date('fecha_sal');
             $table->string('lugar_ent', 100);
             $table->timestamps();
         });
