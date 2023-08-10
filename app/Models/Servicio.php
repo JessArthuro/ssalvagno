@@ -18,14 +18,10 @@ class Servicio extends Model
         return $this->belongsTo(Cotizacion::class);
     }
 
-    public function embarcacion()
-    {
-        return $this->belongsTo(Embarcacion::class);
-    }
-
+    // Relacion muchos a muchos
     public function huespedes()
     {
-        return $this->hasMany(Huesped::class);
+        return $this->belongsToMany(Huesped::class, 'servicio_huesped');
     }
 
     public function getServicioAttribute($value)

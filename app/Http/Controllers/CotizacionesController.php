@@ -34,37 +34,35 @@ class CotizacionesController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
-        $data = $request->all();
-        $cotizacion = Cotizacion::create($data);
+        $cotizacionData = $request->only(['fecha_cot', 'num_cotizacion', 'num_orden', 'nombre', 'empresa_id', 'fecha_ent', 'hora_ent', 'fecha_sal', 'lugar_ent']);
+        $cotizacion = Cotizacion::create($cotizacionData);
 
-        $servicesData = $request->input('servicios', []);
-        // $empleado['dias_acceso'] = serialize($empleado['dias_acceso']);
+        $serviciosData = $request->input('servicios', []);
 
-        foreach ($servicesData as $servData) {
-            $service = new Servicio();
-            // $service->alimentos_ids = serialize($servData['alimentos_ids']);
-            $service->alimentos_ids = json_encode($servData['alimentos_ids']);
-            $service->fecha_serv = $servData['fecha_serv'];
-            $service->cantidad = $servData['cantidad'];
-            $service->precio_unitario = $servData['precio_unitario'];
-            $service->total = $servData['total'];
-            $service->costo_envio = $servData['costo_envio'];
+        foreach ($serviciosData as $servicioData) {
+            $servicio = new Servicio();
+            $servicio->alimentos_ids = $servicioData['alimentos_ids'];
+            $servicio->fecha_serv = $servicioData['fecha_serv'];
+            $servicio->cantidad = $servicioData['cantidad'];
+            $servicio->precio_unitario = $servicioData['precio_unitario'];
+            $servicio->total = $servicioData['total'];
+            $servicio->costo_envio = $servicioData['costo_envio'];
 
-            $cotizacion->servicios()->save($service);
-        }
+            $cotizacion->servicios()->save($servicio);
 
-        $guestsData = $request->input('huespedes', []);
+            $huespedesData = $servicioData['huespedes'] ?? [];
 
-        foreach ($guestsData as $guestData) {
-            $guest = new Huesped();
-            $guest->nombre = $guestData['nombre']; 
-            $guest->desayunos = $guestData['desayunos']; 
-            $guest->comidas = $guestData['comidas']; 
-            $guest->cenas = $guestData['cenas']; 
-            $guest->embarcacion_id = $guestData['embarcacion_id']; 
+            foreach ($huespedesData as $huespedData) {
+                $huesped = new Huesped();
+                $huesped->nombre_h = $huespedData['nombre_h'];
+                $huesped->embarcacion_id = $huespedData['embarcacion_id'];
+                $huesped->desayunos = $huespedData['desayunos'];
+                $huesped->comidas = $huespedData['comidas'];
+                $huesped->cenas = $huespedData['cenas'];
+                $huesped->save();
 
-            $service->huespedes()->save($guest);
+                $servicio->huespedes()->attach($huesped);
+            }
         }
 
         return redirect()->route('quotes.index');

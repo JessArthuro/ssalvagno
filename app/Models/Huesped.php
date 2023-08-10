@@ -11,10 +11,10 @@ class Huesped extends Model
 
     protected $table = 'huespedes';
 
-    protected $fillable = ['servicio_id', 'nombre', 'desayunos', 'comidas', 'cenas', 'embarcacion_id'];
+    protected $fillable = ['nombre_h', 'desayunos', 'comidas', 'cenas', 'embarcacion_id'];
 
-    public function servicio()
+    public function servicios()
     {
-        return $this->belongsTo(Servicio::class);
+        return $this->belongsToMany(Servicio::class, 'servicio_huesped');
     }
 }
