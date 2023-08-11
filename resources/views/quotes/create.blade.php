@@ -95,8 +95,84 @@
             </div>
 
             <div class="col-12" id="servicios-sections">
-                <div class="row servicio-section">
-                    {{-- <div class="col-md-9 mb-4">
+                <div class="card mb-4 servicio-section">
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-1">
+                                <label class="form-label">No.</label>
+                                <input name="" type="text" value="20" class="form-control" readonly>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Fecha</label>
+                                <input name="" type="date" class="form-control">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="service" class="form-label">Alimentos</label>
+                                <input name="" type="text" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Cantidad</label>
+                                <input name="" type="number" value="1" min="1"
+                                    class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Precio Unitario</label>
+                                <input name="" type="text" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Total</label>
+                                <input name="" type="text" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Costo de Envío</label>
+                                <input name="" type="text" class="form-control">
+                            </div>
+                            <div class="col-md-3 d-grid align-items-end">
+                                <button class="btn btn-outline-danger">Remover Servicio</button>
+                            </div>
+                        </div>
+
+                        <table class="table text-center mt-5 caption-top">
+                            <caption>Lista de huespedes</caption>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Huesped</th>
+                                    <th>Embarcacion</th>
+                                    <th>Desayunos</th>
+                                    <th>Comidas</th>
+                                    <th>Cenas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input name="" type="text" value="20" class="form-control"
+                                            readonly>
+                                    </td>
+                                    <td>
+                                        <input name="" type="text" class="form-control">
+                                    </td>
+                                    <td>
+                                        <input name="" type="text" class="form-control">
+                                    </td>
+                                    <td>
+                                        <input name="" type="text" class="form-control">
+                                    </td>
+                                    <td>
+                                        <input name="" type="text" class="form-control">
+                                    </td>
+                                    <td>
+                                        <input name="" type="text" class="form-control">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                {{-- <div class="row servicio-section">
+                    <div class="col-md-9 mb-4">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
@@ -164,8 +240,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div> --}}
-                </div>
+                    </div>
+                </div> --}}
 
                 {{-- A partir de este espacio se crearan las demas secciones de servicios de manera dinamica --}}
             </div>
@@ -191,6 +267,25 @@
         $(document).ready(function() {
             let servicioIndex = 0;
 
+            function agregarHuespedesSection(servicioIndex, cantidad) {
+                let huespedesSection = '';
+
+                for (let i = 0; i < cantidad; i++) {
+                    huespedesSection += `
+                    <div class="huesped">
+                        <!-- Campos del huésped (nombre, embarcacion_id, desayunos, comidas, cenas) -->
+                        <input type="text" name="servicios[${servicioIndex}][huespedes][${i}][servicio_id]" value="${servicioIndex}" placeholder="ID del servicio">
+                        <input type="text" name="servicios[${servicioIndex}][huespedes][${i}][nombre_h]" placeholder="Nombre del huésped">
+                        <input type="number" name="servicios[${servicioIndex}][huespedes][${i}][embarcacion_id]" placeholder="ID de embarcación">
+                        <input type="number" name="servicios[${servicioIndex}][huespedes][${i}][desayunos]" placeholder="Desayunos">
+                        <input type="number" name="servicios[${servicioIndex}][huespedes][${i}][comidas]" placeholder="Comidas">
+                        <input type="number" name="servicios[${servicioIndex}][huespedes][${i}][cenas]" placeholder="Cenas">
+                        </div>
+                        `;
+                    return huespedesSection;
+                }
+            }
+
             // Agregar servicio
             $("#add-servicio-btn").click(function() {
                 let servicioSection = `
@@ -213,6 +308,12 @@
                 `;
 
                 $("#servicios-sections").append(servicioSection);
+
+                let cantidadInput = $(`input[name="servicios[${servicioIndex}][cantidad]"]`);
+                let cantidad = parseInt(cantidadInput.val());
+                let huespedesSection = agregarHuespedesSection(servicioIndex, cantidad);
+                cantidadInput.closest('.servicio-section').find('.huespedes-section').html(
+                    huespedesSection);
                 servicioIndex++;
             });
 
