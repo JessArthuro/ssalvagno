@@ -94,159 +94,10 @@
                 <h3 class="mb-4">Servicios</h3>
             </div>
 
-            <div class="col-12" id="servicios-sections">
-                <div class="card mb-4 servicio-section">
-                    <div class="card-body">
-                        <div class="row g-3">
-                            <div class="col-md-1">
-                                <label class="form-label">No.</label>
-                                <input name="" type="text" value="20" class="form-control" readonly>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label">Fecha</label>
-                                <input name="" type="date" class="form-control">
-                            </div>
-                            <div class="col-md-5">
-                                <label for="service" class="form-label">Alimentos</label>
-                                <input name="" type="text" class="form-control">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label">Cantidad</label>
-                                <input name="" type="number" value="1" min="1"
-                                    class="form-control">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label">Precio Unitario</label>
-                                <input name="" type="text" class="form-control">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label">Total</label>
-                                <input name="" type="text" class="form-control">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label">Costo de Envío</label>
-                                <input name="" type="text" class="form-control">
-                            </div>
-                            <div class="col-md-3 d-grid align-items-end">
-                                <button class="btn btn-outline-danger">Remover Servicio</button>
-                            </div>
-                        </div>
+            {{-- Secciones dinamicas --}}
+            <div class="col-12" id="servicios-sections"></div>
 
-                        <table class="table text-center mt-5 caption-top">
-                            <caption>Lista de huespedes</caption>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Huesped</th>
-                                    <th>Embarcacion</th>
-                                    <th>Desayunos</th>
-                                    <th>Comidas</th>
-                                    <th>Cenas</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input name="" type="text" value="20" class="form-control"
-                                            readonly>
-                                    </td>
-                                    <td>
-                                        <input name="" type="text" class="form-control">
-                                    </td>
-                                    <td>
-                                        <input name="" type="text" class="form-control">
-                                    </td>
-                                    <td>
-                                        <input name="" type="text" class="form-control">
-                                    </td>
-                                    <td>
-                                        <input name="" type="text" class="form-control">
-                                    </td>
-                                    <td>
-                                        <input name="" type="text" class="form-control">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                {{-- <div class="row servicio-section">
-                    <div class="col-md-9 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="row g-3">
-                                            <div class="col-md-2">
-                                                <label for="firstNum" class="form-label">No.</label>
-                                                <input type="text" value="1" class="form-control" id="firstNum"
-                                                    readonly>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="service" class="form-label">Alimentos</label>
-                                                <select name="alimentos_ids[]" id="service"
-                                                    class="form-control select_a" multiple onchange="updateUnitPrice()">
-                                                    @foreach ($foods as $food)
-                                                        <option value="{{ $food->id }}" id="food_{{ $food->id }}"
-                                                            data-price="{{ $food->precio }}">{{ $food->nombre }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="dateService" class="form-label">Fecha</label>
-                                                <input name="fecha_serv[]" type="date" class="form-control"
-                                                    id="dateService">
-                                            </div>
-
-                                            <div class="col-md-2">
-                                                <label for="quantity" class="form-label">Cantidad</label>
-                                                <input name="cantidad[]" type="number" value="1" min="1"
-                                                    class="form-control" id="quantity" onchange="updateTotal()">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="unitPrice" class="form-label">Precio Unitario</label>
-                                                <input name="precio_unitario[]" type="text" placeholder="0.00"
-                                                    class="form-control" id="unitPrice" readonly
-                                                    onchange="updateTotal()">
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label for="total" class="form-label">Total</label>
-                                                <input name="total[]" type="text" class="form-control"
-                                                    id="total">
-                                            </div>
-                                            <div class="col-md-3" id="shippingCostContainer" style="display: none">
-                                                <label for="shippingCost" class="form-label">Costo de Envío</label>
-                                                <input name="costo_envio[]" type="text" class="form-control"
-                                                    id="shippingCost">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 mb-4">
-                        <div class="card">
-                            <div class="card-header bg-white">
-                                <h4 class="mb-0">Lista de huespedes</h4>
-                            </div>
-                            <div class="card-body">
-                                <!-- Contenedor del listado de huespedes por servicio -->
-                                <div class="row g-3 huespedes-section">
-
-                                    <!-- A partir de este espacio se iran agregando mas col-12 de forma dinamica dependiendo del numero de huespedes que requiera el servicio -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-
-                {{-- A partir de este espacio se crearan las demas secciones de servicios de manera dinamica --}}
-            </div>
-
-            <div class="col-12 d-grid mb-4">
+            <div class="col-12 d-grid mb-5">
                 <button class="btn btn-success" type="button" id="add-servicio-btn">Agregar Servicio</button>
             </div>
         </div>
@@ -272,38 +123,89 @@
 
                 for (let i = 0; i < cantidad; i++) {
                     huespedesSection += `
-                    <div class="huesped">
-                        <!-- Campos del huésped (nombre, embarcacion_id, desayunos, comidas, cenas) -->
-                        <input type="text" name="servicios[${servicioIndex}][huespedes][${i}][servicio_id]" value="${servicioIndex}" placeholder="ID del servicio">
-                        <input type="text" name="servicios[${servicioIndex}][huespedes][${i}][nombre_h]" placeholder="Nombre del huésped">
-                        <input type="number" name="servicios[${servicioIndex}][huespedes][${i}][embarcacion_id]" placeholder="ID de embarcación">
-                        <input type="number" name="servicios[${servicioIndex}][huespedes][${i}][desayunos]" placeholder="Desayunos">
-                        <input type="number" name="servicios[${servicioIndex}][huespedes][${i}][comidas]" placeholder="Comidas">
-                        <input type="number" name="servicios[${servicioIndex}][huespedes][${i}][cenas]" placeholder="Cenas">
-                        </div>
-                        `;
-                    return huespedesSection;
+                        <tr class="huesped">
+                            <td>
+                                <input name="servicios[${servicioIndex}][huespedes][${i}][servicio_id]" type="text" value="${servicioIndex}" class="form-control"
+                                    readonly>
+                            </td>
+                            <td>
+                                <input name="servicios[${servicioIndex}][huespedes][${i}][nombre_h]" type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input name="servicios[${servicioIndex}][huespedes][${i}][embarcacion_id]" type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input name="servicios[${servicioIndex}][huespedes][${i}][desayunos]" type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input name="servicios[${servicioIndex}][huespedes][${i}][comidas]" type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input name="servicios[${servicioIndex}][huespedes][${i}][cenas]" type="text" class="form-control">
+                            </td>
+                        </tr>
+                    `;
                 }
+                return huespedesSection;
             }
 
             // Agregar servicio
             $("#add-servicio-btn").click(function() {
                 let servicioSection = `
-                <div class="servicio-section">
-                    <!-- Campos del servicio (alimentos_ids, fecha_serv, cantidad, precio_unitario, total, costo_envio) -->
-                    <input type="text" name="servicios[${servicioIndex}][servicio_id]" value="${servicioIndex}" placeholder="ID del servicio">
-                    <input type="text" name="servicios[${servicioIndex}][alimentos_ids]" placeholder="Alimentos">
-                    <input type="date" name="servicios[${servicioIndex}][fecha_serv]" placeholder="Fecha">
-                    <input type="number" name="servicios[${servicioIndex}][cantidad]" placeholder="Cantidad" min="1" value="1">
-                    <input type="number" name="servicios[${servicioIndex}][precio_unitario]" placeholder="Precio unitario">
-                    <input type="number" name="servicios[${servicioIndex}][total]" placeholder="Total">
-                    <input type="number" name="servicios[${servicioIndex}][costo_envio]" placeholder="Costo de envío">
+                <div class="card mb-6 servicio-section">
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-1">
+                                <label class="form-label">No.</label>
+                                <input name="servicios[${servicioIndex}][servicio_id]" type="text" value="${servicioIndex}" class="form-control" readonly>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Fecha</label>
+                                <input name="servicios[${servicioIndex}][fecha_serv]" type="date" class="form-control">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="service" class="form-label">Alimentos</label>
+                                <input name="servicios[${servicioIndex}][alimentos_ids]" type="text" class="form-control">
+                            </div>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-2">
+                                <label class="form-label">Cantidad</label>
+                                <input name="servicios[${servicioIndex}][cantidad]" type="number" value="1" min="1"
+                                    class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Precio Unitario</label>
+                                <input name="servicios[${servicioIndex}][precio_unitario]" type="text" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Total</label>
+                                <input name="servicios[${servicioIndex}][total]" type="text" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Costo de Envío</label>
+                                <input name="servicios[${servicioIndex}][costo_envio]" type="text" class="form-control">
+                            </div>
+                            <div class="col-md-4 d-flex align-items-end">
+                                <button type="button" class="btn btn-outline-danger remove-servicio-btn">Remover Servicio</button>
+                            </div>
+                        </div>
 
-                    <!-- Secciones dinámicas de huéspedes (generadas automáticamente por JavaScript) -->
-                    <div class="huespedes-section"></div>
-
-                    <!-- Botón para eliminar servicio -->
-                    <button type="button" class="remove-servicio-btn">Eliminar servicio</button>
+                        <table class="table text-center mt-5 caption-top">
+                            <caption>Lista de huespedes</caption>
+                            <thead>
+                                <tr>
+                                    <th style="width: 100px">ID</th>
+                                    <th>Huesped</th>
+                                    <th style="width: 120px">Embarcacion</th>
+                                    <th style="width: 100px">Desayunos</th>
+                                    <th style="width: 100px">Comidas</th>
+                                    <th style="width: 120px">Cenas</th>
+                                </tr>
+                            </thead>
+                            <tbody class="huespedes-section">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 `;
 
@@ -319,28 +221,41 @@
 
             // Eliminar servicio
             $("#servicios-sections").on("click", ".remove-servicio-btn", function() {
-                $(this).parent(".servicio-section").remove();
+                $(this).closest(".servicio-section").remove();
             });
 
-            // Generar automaticamente secciones de huespedes al cambiar el valor de cantidad
+            // Generar mas secciones de huespedes al cambiar el valor de cantidad
             $("#servicios-sections").on("change", ".servicio-section input[name^='servicios'][name$='[cantidad]']",
                 function() {
                     let cantidad = parseInt($(this).val());
-                    let servicioIndex = $(this).siblings("[name^='servicios'][name$='[servicio_id]']").val();
-                    let huespedesSection = $(this).siblings(".huespedes-section");
+                    let servicioIndex = $(this).closest('.servicio-section').find(
+                        "[name^='servicios'][name$='[servicio_id]']").val();
+                    let huespedesSection = $(this).closest('.servicio-section').find('.huespedes-section');
                     huespedesSection.empty();
 
                     for (let i = 0; i < cantidad; i++) {
                         let huesped = `
-                        <div class="huesped">
-                            <!-- Campos del huésped (nombre, embarcacion_id, desayunos, comidas, cenas) -->
-                            <input type="text" name="servicios[${servicioIndex}][huespedes][${i}][servicio_id]" value="${servicioIndex}" placeholder="ID del servicio">
-                            <input type="text" name="servicios[${servicioIndex}][huespedes][${i}][nombre_h]" placeholder="Nombre del huésped">
-                            <input type="number" name="servicios[${servicioIndex}][huespedes][${i}][embarcacion_id]" placeholder="ID de embarcación">
-                            <input type="number" name="servicios[${servicioIndex}][huespedes][${i}][desayunos]" placeholder="Desayunos">
-                            <input type="number" name="servicios[${servicioIndex}][huespedes][${i}][comidas]" placeholder="Comidas">
-                            <input type="number" name="servicios[${servicioIndex}][huespedes][${i}][cenas]" placeholder="Cenas">
-                            </div>
+                        <tr class="huesped">
+                            <td>
+                                <input name="servicios[${servicioIndex}][huespedes][${i}][servicio_id]" type="text" value="${servicioIndex}" class="form-control"
+                                    readonly>
+                            </td>
+                            <td>
+                                <input name="servicios[${servicioIndex}][huespedes][${i}][nombre_h]" type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input name="servicios[${servicioIndex}][huespedes][${i}][embarcacion_id]" type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input name="servicios[${servicioIndex}][huespedes][${i}][desayunos]" type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input name="servicios[${servicioIndex}][huespedes][${i}][comidas]" type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input name="servicios[${servicioIndex}][huespedes][${i}][cenas]" type="text" class="form-control">
+                            </td>
+                        </tr>
                             `;
                         huespedesSection.append(huesped);
                     }
