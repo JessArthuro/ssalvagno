@@ -34,6 +34,7 @@ class CotizacionesController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $cotizacionData = $request->only(['fecha_cot', 'num_cotizacion', 'num_orden', 'nombre', 'empresa_id', 'fecha_ent', 'hora_ent', 'fecha_sal', 'lugar_ent']);
         $cotizacion = Cotizacion::create($cotizacionData);
 
@@ -41,7 +42,7 @@ class CotizacionesController extends Controller
 
         foreach ($serviciosData as $servicioData) {
             $servicio = new Servicio();
-            $servicio->alimentos_ids = $servicioData['alimentos_ids'];
+            $servicio->alimentos_ids = json_encode($servicioData['alimentos_ids']);
             $servicio->fecha_serv = $servicioData['fecha_serv'];
             $servicio->cantidad = $servicioData['cantidad'];
             $servicio->precio_unitario = $servicioData['precio_unitario'];
