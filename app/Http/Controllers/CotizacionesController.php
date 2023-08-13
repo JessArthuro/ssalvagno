@@ -101,7 +101,15 @@ class CotizacionesController extends Controller
     public function pdf($id)
     {
         $quote = Cotizacion::find($id);
-        $pdf = Pdf::loadView('quotes.pdf', compact('quote'));
+        $serviceFoodsName = [];
+
+        foreach ($quote->servicios as $serv) {
+            $foodsIds = json_decode($serv->alimentos_ids);
+            $foodsName = Alimento::whereIn('id', $foodsIds)->pluck('nombre', 'id');
+            $serviceFoodsName[$serv->id] = $foodsName;
+        }
+
+        $pdf = Pdf::loadView('quotes.pdf', compact('quote', 'serviceFoodsName'));
         $filename = "Cotizacion_" . $quote->num_cotizacion . ".pdf";
         return $pdf->stream($filename);
     }
@@ -110,7 +118,7 @@ class CotizacionesController extends Controller
     {
         $id = $request->input('id');
 
-        $quote = Cotizacion::with('servicios')->find($id);
+        $quote = Cotizacion::with('servicios.huespedes')->find($id);
         $filename = "Cotizacion_" . $quote->num_cotizacion . ".xlsx";
         return Excel::download(new CotizacionesExport($quote), $filename);
     }

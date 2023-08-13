@@ -37,13 +37,13 @@
                     </ul>
                 </div>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a @if (request()->is('services')) class="nav-link active" @endif class="nav-link" href="{{ route('services.index') }}">
                     <i data-feather="list" class="nav-icon icon-xs me-2">
                     </i>
                     Servicios
                 </a>
-            </li>
+            </li> --}}
 
             <!-- Titulo de la seccion -->
             <li class="nav-item">

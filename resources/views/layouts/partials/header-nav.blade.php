@@ -4,7 +4,7 @@
         <a id="nav-toggle" href="#"><i data-feather="menu" class="nav-icon me-2 icon-xs"></i></a>
         <!--Navbar nav -->
         <ul class="navbar-nav navbar-right-wrap ms-auto d-flex nav-top-wrap">
-            <li class="dropdown stopevent">
+            {{-- <li class="dropdown stopevent">
                 <a class="btn btn-light btn-icon rounded-circle indicator indicator-primary text-muted" href="#"
                     role="button" id="dropdownNotification" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
@@ -69,16 +69,18 @@
                         </div>
                     </div>
                 </div>
-            </li>
+            </li> --}}
+
             <!-- List -->
             <li class="dropdown ms-2">
                 <a class="rounded-circle" href="#" role="button" id="dropdownUser" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <div class="avatar avatar-md avatar-indicators avatar-online">
-                        <img alt="avatar" src="{{ asset('./assets/images/avatar/avatar-1.jpg') }}" class="rounded-circle" />
+                    <div class="avatar avatar-md">
+                    {{-- <div class="avatar avatar-md avatar-indicators avatar-online"> --}}
+                        {{-- <img alt="avatar" src="{{ asset('./assets/images/avatar/avatar-1.jpg') }}" class="rounded-circle" /> --}}
                     </div>
                 </a>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
+                {{-- <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
                     <div class="px-4 pb-0 pt-2">
 
                         <div class="lh-1 ">
@@ -117,7 +119,7 @@
                             </a>
                         </li>
                     </ul>
-                </div>
+                </div> --}}
             </li>
         </ul>
     </nav>

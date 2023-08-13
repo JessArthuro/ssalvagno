@@ -82,23 +82,38 @@
                 <tr>
                     <td class="pl-3">
                         <small>Servicio de Alimentos:</small>
-                        @foreach ($serv->servicio as $index => $food)
-                            <span><small>{{ $food }}</small></span>
-                            @if (!$loop->last && count($serv->servicio) > 1)
+
+                        @foreach ($serviceFoodsName[$serv->id] as $index => $foodName)
+                            <small>{{ $foodName }}</small>
+                            @if (!$loop->last && count($serviceFoodsName[$serv->id]) > 1)
                                 -
                             @endif
                         @endforeach
                         <br>
+
                         <small>Fecha: {{ date('d-m-Y', strtotime($serv->fecha_serv)) }}</small> <br>
-                        <small>Huesped: <span class="text-capitalize">{{ $serv->huesped }}</span></small>
+                        <small>
+                            <ol class="my-2">
+                                @foreach ($serv->huespedes as $huesped)
+                                    <li>{{ $huesped->nombre_h }}</li>
+                                @endforeach
+                            </ol>
+                        </small>
                     </td>
                     <td class="text-center"><small>{{ $serv->cantidad }}</small></td>
                     <td class="text-center"><small>${{ $serv->precio_unitario }}</small></td>
                     <td class="text-center"><small>${{ $serv->total }}</small></td>
                 </tr>
 
+                @if ($serv->costo_envio != null || $serv->costo_envio > 0)
+                    <tr>
+                        <td class="pl-3" colspan="3"><small>Servicio de Entrega:</small></td>
+                        <td class="text-center"><small>${{ number_format($serv->costo_envio, 2) }}</small></td>
+                    </tr>
+                @endif
+
                 @php
-                    $subtotal += $serv->total;
+                    $subtotal += $serv->total + $serv->costo_envio;
                 @endphp
             @endforeach
 
@@ -110,15 +125,15 @@
                 $total = $subtotal + $iva;
             @endphp
             <tr>
-                <td colspan="3" class="text-right"><small>Subtotal</small></td>
+                <td colspan="3" class="text-right pr-3"><small>Subtotal</small></td>
                 <td class="text-center"><small>${{ number_format($subtotal, 2) }}</small></td>
             </tr>
             <tr>
-                <td colspan="3" class="text-right"><small>IVA</small></td>
+                <td colspan="3" class="text-right pr-3"><small>IVA</small></td>
                 <td class="text-center"><small>${{ number_format($iva, 2) }}</small></td>
             </tr>
             <tr>
-                <td colspan="3" class="text-right"><small>Total</small></td>
+                <td colspan="3" class="text-right pr-3"><small>Total</small></td>
                 <td class="text-center"><small>${{ number_format($total, 2) }}</small></td>
             </tr>
         </tbody>

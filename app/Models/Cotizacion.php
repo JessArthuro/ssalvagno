@@ -26,7 +26,7 @@ class Cotizacion extends Model
             $newQuoteNumber = intval($lastQuoteNumber) + 1;
         } else {
             // No hay numeros de cotizacion existentes, iniciar en la 215
-            $newQuoteNumber = 215;
+            $newQuoteNumber = 225;
         }
 
         return $newQuoteNumber . '-' . $currentYear;

@@ -17,4 +17,9 @@ class Huesped extends Model
     {
         return $this->belongsToMany(Servicio::class, 'servicio_huesped');
     }
+
+    public function embarcacion()
+    {
+        return $this->belongsTo(Embarcacion::class);
+    }
 }

@@ -50,14 +50,14 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label for="name" class="form-label">Nombre</label>
-                                <input name="nombre" value="Lizeydi Manzano" type="text" class="form-control"
+                                <input name="nombre" type="text" class="form-control"
                                     id="name">
                             </div>
 
                             <div class="col-md-6">
                                 <label for="company" class="form-label">Empresa</label>
                                 <select name="empresa_id" id="company" class="form-control">
-                                    {{-- <option selected disabled>Selecciona una opción...</option> --}}
+                                    <option selected disabled>Selecciona una opción...</option>
                                     @foreach ($companies as $company)
                                         <option value="{{ $company->id }}">{{ $company->nombre }}</option>
                                     @endforeach
@@ -66,25 +66,25 @@
 
                             <div class="col-md-4">
                                 <label for="deliveryDate" class="form-label">Fecha de Entrega</label>
-                                <input name="fecha_ent" value="{{ date('Y-m-d') }}" type="date" class="form-control"
+                                <input name="fecha_ent" type="date" class="form-control"
                                     id="deliveryDate">
                             </div>
 
                             <div class="col-md-4">
                                 <label for="deliveryTime" class="form-label">Hora de Entrega</label>
-                                <input name="hora_ent" value="{{ now()->format('H:i') }}" type="time"
+                                <input name="hora_ent" type="time"
                                     class="form-control" id="deliveryTime">
                             </div>
 
                             <div class="col-md-4">
                                 <label for="departureDate" class="form-label">Fecha de Salida</label>
-                                <input name="fecha_sal" value="{{ date('Y-m-d') }}" type="date" class="form-control"
+                                <input name="fecha_sal" type="date" class="form-control"
                                     id="departureDate">
                             </div>
 
                             <div class="col-12">
                                 <label for="deliveryPlace" class="form-label">Lugar de Entrega</label>
-                                <input name="lugar_ent" value="Lugar demo" type="text" class="form-control"
+                                <input name="lugar_ent" type="text" class="form-control"
                                     id="deliveryPlace">
                             </div>
                         </div>
@@ -227,7 +227,7 @@
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">Fecha</label>
-                                <input name="servicios[${servicioIndex}][fecha_serv]" value="{{ date('Y-m-d') }}" type="date" class="form-control">
+                                <input name="servicios[${servicioIndex}][fecha_serv]" type="date" class="form-control">
                             </div>
                             <div class="col-md-5">
                                 <label for="service" class="form-label">Alimentos</label>

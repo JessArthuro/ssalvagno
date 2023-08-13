@@ -96,7 +96,7 @@
                             <br>
                             Fecha: {{ date('d-m-Y', strtotime($serv->fecha_serv)) }} <br>
 
-                            <ol class="my-2">
+                            <ol class="mt-3 mb-2">
                                 @foreach ($serv->huespedes as $huesped)
                                     <li>{{ $huesped->nombre_h }}</li>
                                 @endforeach
