@@ -85,24 +85,37 @@
                     <tr>
                         <td>
                             Servicio de Alimentos:
-                            @foreach ($serv->servicio as $index => $food)
-                                <span>{{ $food }}</span>
-                                @if (!$loop->last && count($serv->servicio) > 1)
+
+                            @foreach ($serviceFoodsName[$serv->id] as $index => $foodName)
+                                <span>{{ $foodName }}</span>
+                                @if (!$loop->last && count($serviceFoodsName[$serv->id]) > 1)
                                     -
                                 @endif
                             @endforeach
+
                             <br>
                             Fecha: {{ date('d-m-Y', strtotime($serv->fecha_serv)) }} <br>
 
-                            Huesped: <span class="text-capitalize">{{ $serv->huesped }}</span>
+                            <ol class="my-2">
+                                @foreach ($serv->huespedes as $huesped)
+                                    <li>{{ $huesped->nombre_h }}</li>
+                                @endforeach
+                            </ol>
                         </td>
                         <td class="text-center">{{ $serv->cantidad }}</td>
                         <td class="text-center">${{ $serv->precio_unitario }}</td>
                         <td class="text-center">${{ $serv->total }}</td>
                     </tr>
 
+                    @if ($serv->costo_envio != null || $serv->costo_envio > 0)
+                        <tr>
+                            <td colspan="3">Servicio de Entrega:</td>
+                            <td class="text-center">${{ number_format($serv->costo_envio, 2) }}</td>
+                        </tr>
+                    @endif
+
                     @php
-                        $subtotal += $serv->total;
+                        $subtotal += $serv->total + $serv->costo_envio;
                     @endphp
                 @endforeach
 

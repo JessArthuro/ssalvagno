@@ -72,7 +72,15 @@ class CotizacionesController extends Controller
     public function show($id)
     {
         $quote = Cotizacion::find($id);
-        return view('quotes.show', compact('quote'));
+        $serviceFoodsName = [];
+
+        foreach ($quote->servicios as $serv) {
+            $foodsIds = json_decode($serv->alimentos_ids);
+            $foodsName = Alimento::whereIn('id', $foodsIds)->pluck('nombre', 'id');
+            $serviceFoodsName[$serv->id] = $foodsName;
+        }
+
+        return view('quotes.show', compact('quote', 'serviceFoodsName'));
     }
 
     public function edit($id)
