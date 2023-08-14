@@ -8,6 +8,7 @@
         'method' => 'POST',
         'nameValue' => old('nombre'),
         'priceValue' => old('precio'),
+        'icon' => 'save',
         'titleBtn' => 'Crear',
     ])
 @endsection

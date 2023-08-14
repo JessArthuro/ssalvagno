@@ -1,3 +1,9 @@
+<style>
+    .slimScrollBar {
+        background: #212b36 !important;
+    }
+</style>
+
 <nav class="navbar-vertical navbar">
     <div class="nav-scroller">
         <!-- Brand logo -->
@@ -8,7 +14,9 @@
         <ul class="navbar-nav flex-column" id="sideNavbar">
             <li class="nav-item">
                 <a @if (request()->is('/')) class="nav-link active" @endif class="nav-link" href="/">
-                    <i data-feather="home" class="nav-icon icon-xs me-2"></i> Dashboard
+                    {{-- <i data-feather="home" class="nav-icon icon-xs me-2"></i>  --}}
+                    <i class="las la-home la-lg me-2"></i>
+                    Dashboard
                 </a>
             </li>
 
@@ -20,20 +28,20 @@
             <li class="nav-item">
                 <a class="nav-link has-arrow collapsed" href="#!" data-bs-toggle="collapse"
                     data-bs-target="#navAuthentication" aria-expanded="false" aria-controls="navAuthentication">
-                    <i data-feather="dollar-sign" class="nav-icon icon-xs me-2">
-                    </i> Cotizaciones
+                    <i class="las la-file-invoice la-lg me-2"></i>
+                    Cotizaciones
                 </a>
                 <div id="navAuthentication" @if (request()->is('quotes*')) class="collapse show" @endif
                     class="collapse" data-bs-parent="#sideNavbar">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a @if (request()->is('quotes')) class="nav-link active" @endif class="nav-link"
-                                href="{{ route('quotes.index') }}">Lista de cotizaciones</a>
+                            <a @if (request()->is('quotes')) class="nav-link active ms-1" @endif class="nav-link ms-1"
+                                href="{{ route('quotes.index') }}">Proveeduría</a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a @if (request()->is('quotes/create')) class="nav-link active" @endif class="nav-link"
                                 href="{{ route('quotes.create') }}">Agregar cotización</a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </li>
@@ -53,24 +61,21 @@
             <li class="nav-item">
                 <a @if (request()->is('companies*')) class="nav-link active" @endif class="nav-link"
                     href="{{ route('companies.index') }}">
-                    <i data-feather="briefcase" class="nav-icon icon-xs me-2">
-                    </i>
+                    <i class="las la-building la-lg me-2"></i>
                     Empresas
                 </a>
             </li>
             <li class="nav-item">
                 <a @if (request()->is('boats*')) class="nav-link active" @endif class="nav-link"
                     href="{{ route('boats.index') }}">
-                    <i data-feather="anchor" class="nav-icon icon-xs me-2">
-                    </i>
+                    <i class="las la-anchor la-lg me-2"></i>
                     Embarcaciones
                 </a>
             </li>
             <li class="nav-item">
                 <a @if (request()->is('foods*')) class="nav-link active" @endif class="nav-link"
                     href="{{ route('foods.index') }}">
-                    <i data-feather="coffee" class="nav-icon icon-xs me-2">
-                    </i>
+                    <i class="las la-utensils la-lg me-2"></i>
                     Alimentos
                 </a>
             </li>

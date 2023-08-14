@@ -1,7 +1,7 @@
 <div class="header @@classList">
     <!-- navbar -->
     <nav class="navbar-classic navbar navbar-expand-lg">
-        <a id="nav-toggle" href="#"><i data-feather="menu" class="nav-icon me-2 icon-xs"></i></a>
+        <a id="nav-toggle" href="#"><i data-feather="menu" class="nav-icon me-2 icon-sm"></i></a>
         <!--Navbar nav -->
         <ul class="navbar-nav navbar-right-wrap ms-auto d-flex nav-top-wrap">
             {{-- <li class="dropdown stopevent">

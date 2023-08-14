@@ -30,9 +30,9 @@
 
           <div class="col-12 mt-5">
               <div class="d-flex flex-wrap gap-2">
-                  <button class="btn btn-primary" type="submit">{{ $titleBtn }} Empresa</button>
+                  <button class="btn btn-primary" type="submit"><i class="las la-{{ $icon }} la-lg"></i> {{ $titleBtn }} Empresa</button>
                   <div class="vr"></div>
-                  <a href="{{ route('companies.index') }}" class="btn btn-outline-danger">Cancelar</a>
+                  <a href="{{ route('companies.index') }}" class="btn btn-outline-secondary"><i class="las la-times"></i> Cancelar</a>
               </div>
           </div>
       </form>

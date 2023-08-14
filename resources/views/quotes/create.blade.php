@@ -103,16 +103,16 @@
             <div class="col-12" id="servicios-sections"></div>
 
             <div class="col-12 d-grid mb-5">
-                <button class="btn btn-success" type="button" id="add-servicio-btn">Agregar Servicio</button>
+                <button class="btn btn-success" type="button" id="add-servicio-btn"><i class="las la-plus"></i> Agregar Servicio</button>
             </div>
         </div>
 
         {{-- Botones de accion --}}
         <div class="row">
             <div class="col-12 d-flex flex-wrap gap-2">
-                <button class="btn btn-primary" type="submit">Crear Cotización</button>
+                <button class="btn btn-primary" type="submit"><i class="las la-save la-lg"></i> Crear Cotización</button>
                 <div class="vr"></div>
-                <a href="{{ route('quotes.index') }}" class="btn btn-outline-secondary">Cancelar</a>
+                <a href="{{ route('quotes.index') }}" class="btn btn-outline-secondary"><i class="las la-times"></i> Cancelar</a>
             </div>
         </div>
     </form>
@@ -260,7 +260,7 @@
                                 <input name="servicios[${servicioIndex}][costo_envio]" type="text" class="form-control">
                             </div>
                             <div class="col-md-4 d-grid align-items-end">
-                                <button type="button" class="btn btn-outline-danger remove-servicio-btn">Remover Servicio</button>
+                                <button type="button" class="btn btn-outline-danger remove-servicio-btn"><i class="las la-minus"></i> Remover Servicio</button>
                             </div>
                         </div>
 

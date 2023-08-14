@@ -3,7 +3,7 @@
 @section('content')
     <div class="d-flex justify-content-between mt-3 mb-5">
         <h3>Lista de Alimentos</h3>
-        <a href="{{ route('foods.create') }}" class="btn btn-primary">+ Nuevo Alimento</a>
+        <a href="{{ route('foods.create') }}" class="btn btn-primary"><i class="las la-plus"></i> Nuevo Alimento</a>
     </div>
 
     <style>
@@ -17,7 +17,6 @@
             <table class="table table-hover text-center pt-3" id="example">
                 <thead>
                     <tr class="table-dark">
-                        <th class="text-light text-center">ID</th>
                         <th class="text-light text-center">Nombre</th>
                         <th class="text-light text-center">Precio</th>
                         <th class="text-light text-center">Opciones</th>
@@ -26,7 +25,6 @@
                 <tbody>
                     @foreach ($foods as $food)
                         <tr>
-                            <td>{{ $food->id }}</td>
                             <td class="text-capitalize">{{ $food->nombre }}</td>
                             <td>${{ $food->precio }}</td>
                             <td>

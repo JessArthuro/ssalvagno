@@ -17,9 +17,9 @@
 
           <div class="col-12 mt-5">
               <div class="d-flex flex-wrap gap-2">
-                  <button class="btn btn-primary" type="submit">{{ $titleBtn }} Embarcación</button>
+                  <button class="btn btn-primary" type="submit"><i class="las la-{{ $icon }} la-lg"></i> {{ $titleBtn }} Embarcación</button>
                   <div class="vr"></div>
-                  <a href="{{ route('boats.index') }}" class="btn btn-outline-danger">Cancelar</a>
+                  <a href="{{ route('boats.index') }}" class="btn btn-outline-secondary"><i class="las la-times"></i> Cancelar</a>
               </div>
           </div>
       </form>

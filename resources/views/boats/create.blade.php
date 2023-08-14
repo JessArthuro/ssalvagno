@@ -7,6 +7,7 @@
       'action' => route('boats.store'),
       'method' => 'POST',
       'nameValue' => old('nombre'),
+      'icon' => 'save',
       'titleBtn' => 'Crear',
     ])
 @endsection

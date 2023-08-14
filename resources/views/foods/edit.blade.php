@@ -8,6 +8,7 @@
       'method' => 'PUT',
       'nameValue' => old('nombre', $food->nombre),
       'priceValue' => old('precio', $food->precio),
+      'icon' => 'sync',
       'titleBtn' => 'Actualizar'
     ])
 @endsection

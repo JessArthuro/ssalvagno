@@ -6,15 +6,15 @@
             </i></a>
 
         <div class="d-flex gap-2 flex-wrap my-3">
-            <a href="{{ route('generate_pdf', $quote) }}" class="btn btn-danger" target="_blank"><i data-feather="file-text"
-                    class="nav-icon icon-xs">
-                </i> Generar PDF</a>
+            <a href="{{ route('generate_pdf', $quote) }}" class="btn btn-danger" target="_blank"><i
+                    class="las la-file-pdf la-lg"></i> Generar PDF</a>
 
             <form action="{{ route('generate_excel') }}" method="POST">
                 @csrf
                 <input type="hidden" name="id" value="{{ $quote->id }}">
-                <button type="submit" class="btn btn-success"><i data-feather="layout" class="nav-icon icon-xs">
-                    </i> Generar Excel</button>
+                <button type="submit" class="btn btn-success">
+                    <i class="las la-file-excel la-lg"></i>
+                    Generar Excel</button>
             </form>
         </div>
 

@@ -7,6 +7,7 @@
       'action' => route('boats.update', $boat),
       'method' => 'PUT',
       'nameValue' => old('nombre', $boat->nombre),
+      'icon' => 'sync',
       'titleBtn' => 'Actualizar',
     ])
 @endsection
