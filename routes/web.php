@@ -5,6 +5,7 @@ use App\Http\Controllers\ServiciosController;
 use App\Http\Controllers\EmpresasController;
 use App\Http\Controllers\EmbarcacionesController;
 use App\Http\Controllers\AlimentosController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,10 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.master');
-});
-
+Route::get('/', [DashboardController::class, 'index']);
 Route::resource('quotes', CotizacionesController::class);
 Route::get('quotes/pdf/{quote}', [CotizacionesController::class, 'pdf'])->name('generate_pdf');
 Route::post('quotes/excel', [CotizacionesController::class, 'excel'])->name('generate_excel');

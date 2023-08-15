@@ -10,6 +10,10 @@
         .dropdown-toggle::before {
             display: none !important;
         }
+
+        .table-hover tbody tr:hover .quote_num {
+            color: #624bff;
+        }
     </style>
 
     <div class="card">
@@ -27,7 +31,7 @@
                 <tbody>
                     @foreach ($quotes as $quote)
                     <tr>
-                        <td><a class="text-secondary" href="{{ route('quotes.show', $quote) }}">{{ $quote->num_cotizacion }}</a></td>
+                        <td><a class="text-secondary" href="{{ route('quotes.show', $quote) }}"><span class="quote_num">{{ $quote->num_cotizacion }}</span></a></td>
                         <td class="text-capitalize">{{ $quote->nombre }}</td>
                         <td class="text-capitalize">{{ $quote->empresa->nombre }}</td>
                         <td>{{ date('d-m-Y', strtotime($quote->fecha_ent)) }}</td>

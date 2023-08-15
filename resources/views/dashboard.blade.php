@@ -1,4 +1,13 @@
- <div class="bg-primary pt-10 pb-21"></div>
+@extends('layouts.master')
+
+@section('content')
+    <div class="bg-primary mt-2 p-4 rounded">
+        <h4 class="text-light">{{ $formattedDate }}</h4>
+        <h2 class="text-light">{{ $welcomeMessage }}, Brisney</h2>
+    </div>
+@endsection
+ 
+ {{-- <div class="bg-primary pt-10 pb-21"></div>
  <div class="container-fluid mt-n22 px-6">
      <div class="row">
          <div class="col-lg-12 col-md-12 col-12">
@@ -735,4 +744,4 @@
              </div>
          </div>
      </div>
- </div>
+ </div> --}}

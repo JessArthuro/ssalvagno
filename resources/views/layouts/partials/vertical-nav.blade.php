@@ -35,8 +35,17 @@
                     class="collapse" data-bs-parent="#sideNavbar">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a @if (request()->is('quotes')) class="nav-link active ms-1" @endif class="nav-link ms-1"
-                                href="{{ route('quotes.index') }}">Proveeduría</a>
+                            <a @if (request()->is('quotes')) class="nav-link active ms-1" @endif
+                                class="nav-link ms-1" href="{{ route('quotes.index') }}">Proveeduría</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link ms-1" href="#">Coffee Break</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link ms-1" href="#">Banquetes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link ms-1" href="#">Taquiza</a>
                         </li>
                         {{-- <li class="nav-item">
                             <a @if (request()->is('quotes/create')) class="nav-link active" @endif class="nav-link"
