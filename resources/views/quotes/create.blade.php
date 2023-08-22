@@ -9,113 +9,113 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('quotes.store') }}" method="POST">
-        @csrf
-        {{-- Datos de la Cotizacion --}}
-        <div class="row mt-3 mb-5">
-            <div class="col-12">
-                <h3 class="mb-4">Nueva Cotización</h3>
-            </div>
+    <section class="px-5 py-4">
+        <form action="{{ route('quotes.store') }}" method="POST">
+            @csrf
+            {{-- Datos de la Cotizacion --}}
+            <div class="row mt-3 mb-5">
+                <div class="col-12">
+                    <h3 class="mb-4">Nueva Cotización</h3>
+                </div>
 
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row g-3">
-                            <div class="col-12">
-                                <label for="date" class="form-label">Fecha</label>
-                                <input name="fecha_cot" value="{{ date('Y-m-d') }}" type="date" class="form-control"
-                                    id="date">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label for="date" class="form-label">Fecha</label>
+                                    <input name="fecha_cot" value="{{ date('Y-m-d') }}" type="date" class="form-control"
+                                        id="date">
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="quoteNum" class="form-label">No. Cotización</label>
+                                    <input name="num_cotizacion" value="{{ old('num_cotizacion', $folio) }}" type="text"
+                                        class="form-control" id="quoteNum">
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="numOrder" class="form-label">No. Orden <small
+                                            class="text-muted">(Opcional)</small></label>
+                                    <input name="num_orden" type="text" class="form-control" id="numOrder">
+                                </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
 
-                            <div class="col-12">
-                                <label for="quoteNum" class="form-label">No. Cotización</label>
-                                <input name="num_cotizacion" value="{{ old('num_cotizacion', $folio) }}" type="text"
-                                    class="form-control" id="quoteNum">
-                            </div>
+                {{-- Informacion de Entrega  --}}
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Nombre</label>
+                                    <input name="nombre" type="text" class="form-control" id="name">
+                                </div>
 
-                            <div class="col-12">
-                                <label for="numOrder" class="form-label">No. Orden <small
-                                        class="text-muted">(Opcional)</small></label>
-                                <input name="num_orden" type="text" class="form-control" id="numOrder">
+                                <div class="col-md-6">
+                                    <label for="company" class="form-label">Empresa</label>
+                                    <select name="empresa_id" id="company" class="form-control">
+                                        <option selected disabled>Selecciona una opción...</option>
+                                        @foreach ($companies as $company)
+                                            <option value="{{ $company->id }}">{{ $company->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="deliveryDate" class="form-label">Fecha de Entrega</label>
+                                    <input name="fecha_ent" type="date" class="form-control" id="deliveryDate">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="deliveryTime" class="form-label">Hora de Entrega</label>
+                                    <input name="hora_ent" type="time" class="form-control" id="deliveryTime">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="departureDate" class="form-label">Fecha de Salida</label>
+                                    <input name="fecha_sal" type="date" class="form-control" id="departureDate">
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="deliveryPlace" class="form-label">Lugar de Entrega</label>
+                                    <input name="lugar_ent" type="text" class="form-control" id="deliveryPlace">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {{-- Informacion de Entrega  --}}
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label for="name" class="form-label">Nombre</label>
-                                <input name="nombre" type="text" class="form-control"
-                                    id="name">
-                            </div>
+            {{-- Datos del listado de Servicios  --}}
+            <div class="row mt-2">
+                <div class="col-12">
+                    <h3 class="mb-4">Servicios</h3>
+                </div>
 
-                            <div class="col-md-6">
-                                <label for="company" class="form-label">Empresa</label>
-                                <select name="empresa_id" id="company" class="form-control">
-                                    <option selected disabled>Selecciona una opción...</option>
-                                    @foreach ($companies as $company)
-                                        <option value="{{ $company->id }}">{{ $company->nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                {{-- Secciones dinamicas --}}
+                <div class="col-12" id="servicios-sections"></div>
 
-                            <div class="col-md-4">
-                                <label for="deliveryDate" class="form-label">Fecha de Entrega</label>
-                                <input name="fecha_ent" type="date" class="form-control"
-                                    id="deliveryDate">
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="deliveryTime" class="form-label">Hora de Entrega</label>
-                                <input name="hora_ent" type="time"
-                                    class="form-control" id="deliveryTime">
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="departureDate" class="form-label">Fecha de Salida</label>
-                                <input name="fecha_sal" type="date" class="form-control"
-                                    id="departureDate">
-                            </div>
-
-                            <div class="col-12">
-                                <label for="deliveryPlace" class="form-label">Lugar de Entrega</label>
-                                <input name="lugar_ent" type="text" class="form-control"
-                                    id="deliveryPlace">
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-12 d-grid mb-5">
+                    <button class="btn btn-success" type="button" id="add-servicio-btn"><i class="las la-plus"></i> Agregar
+                        Servicio</button>
                 </div>
             </div>
-        </div>
 
-        {{-- Datos del listado de Servicios  --}}
-        <div class="row mt-2">
-            <div class="col-12">
-                <h3 class="mb-4">Servicios</h3>
+            {{-- Botones de accion --}}
+            <div class="row">
+                <div class="col-12 d-flex flex-wrap gap-2">
+                    <button class="btn btn-primary" type="submit"><i class="las la-save la-lg"></i> Crear
+                        Cotización</button>
+                    <div class="vr"></div>
+                    <a href="{{ route('quotes.index') }}" class="btn btn-outline-secondary"><i class="las la-times"></i>
+                        Cancelar</a>
+                </div>
             </div>
-
-            {{-- Secciones dinamicas --}}
-            <div class="col-12" id="servicios-sections"></div>
-
-            <div class="col-12 d-grid mb-5">
-                <button class="btn btn-success" type="button" id="add-servicio-btn"><i class="las la-plus"></i> Agregar Servicio</button>
-            </div>
-        </div>
-
-        {{-- Botones de accion --}}
-        <div class="row">
-            <div class="col-12 d-flex flex-wrap gap-2">
-                <button class="btn btn-primary" type="submit"><i class="las la-save la-lg"></i> Crear Cotización</button>
-                <div class="vr"></div>
-                <a href="{{ route('quotes.index') }}" class="btn btn-outline-secondary"><i class="las la-times"></i> Cancelar</a>
-            </div>
-        </div>
-    </form>
+        </form>
+    </section>
 @endsection
 
 @section('js')

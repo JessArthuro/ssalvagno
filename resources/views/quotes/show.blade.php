@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <section class="mb-6">
+    <section class="px-5 py-4 mb-5">
         <a href="{{ route('quotes.index') }}" class="text-secondary"><i data-feather="arrow-left" class="nav-icon icon-sm">
             </i></a>
 

@@ -39,7 +39,7 @@
             <!-- Header navigation -->
             @include('layouts.partials.header-nav')
 
-            <div class="container-fluid px-5 py-4">
+            <div class="main-content">
                 @yield('content')
             </div>
         </div>

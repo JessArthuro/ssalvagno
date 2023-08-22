@@ -45,7 +45,7 @@
                             <a class="nav-link ms-1" href="#">Banquetes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link ms-1" href="#">Taquiza</a>
+                            <a class="nav-link ms-1" href="#">Taquizas</a>
                         </li>
                         {{-- <li class="nav-item">
                             <a @if (request()->is('quotes/create')) class="nav-link active" @endif class="nav-link"

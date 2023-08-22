@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cotizacion;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,9 @@ class DashboardController extends Controller
         $formattedDate = "{$weekday}, {$day} de {$month}";
 
         $welcomeMessage = $this->welcomeMessage();
-        return view('dashboard', compact('formattedDate', 'welcomeMessage'));
+
+        $quotes = Cotizacion::count();
+        return view('dashboard', compact('formattedDate', 'welcomeMessage', 'quotes'));
     }
 
     public function welcomeMessage()

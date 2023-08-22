@@ -1,13 +1,54 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="bg-primary mt-2 p-4 rounded">
-        <h4 class="text-light">{{ $formattedDate }}</h4>
-        <h2 class="text-light">{{ $welcomeMessage }}, Brisney</h2>
+    <div class="bg-primary pt-18 pb-15"></div>
+    <div class="container-fluid mt-n23 px-5">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="text-light">{{ $formattedDate }}</h4>
+                <h2 class="text-light">{{ $welcomeMessage }}, Brisney</h2>
+            </div>
+            <div class="col-md-3 mt-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Proveeduría</h4>
+                        <h1 class="fw-bold">{{ $quotes }}</h1>
+                        <a class="fw-semi-bold" href="{{ route('quotes.index') }}">Ver Cotizaciones</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mt-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Coffee Break</h4>
+                        <h1 class="fw-bold">0</h1>
+                        <a class="fw-semi-bold" href="#">Ver Cotizaciones</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mt-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Banquetes</h4>
+                        <h1 class="fw-bold">0</h1>
+                        <a class="fw-semi-bold" href="#">Ver Cotizaciones</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mt-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Taquizas</h4>
+                        <h1 class="fw-bold">0</h1>
+                        <a class="fw-semi-bold" href="#">Ver Cotizaciones</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
- 
- {{-- <div class="bg-primary pt-10 pb-21"></div>
+
+{{-- <div class="bg-primary pt-10 pb-21"></div>
  <div class="container-fluid mt-n22 px-6">
      <div class="row">
          <div class="col-lg-12 col-md-12 col-12">
