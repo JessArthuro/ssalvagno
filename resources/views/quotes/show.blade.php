@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
-    <section class="px-5 py-4 mb-5">
+    <section class="px-5 py-4 bg-white">
         <a href="{{ route('quotes.index') }}" class="text-secondary"><i data-feather="arrow-left" class="nav-icon icon-sm">
             </i></a>
 
         <div class="d-flex gap-2 flex-wrap my-3">
-            <a href="{{ route('generate_pdf', $quote) }}" class="btn btn-danger" target="_blank"><i
+            <a href="{{ route('generate_pdf', $quote) }}" class="btn btn-danger"><i
                     class="las la-file-pdf la-lg"></i> Generar PDF</a>
 
             <form action="{{ route('generate_excel') }}" method="POST">

@@ -16,7 +16,7 @@
                 <a @if (request()->is('/')) class="nav-link active" @endif class="nav-link" href="/">
                     {{-- <i data-feather="home" class="nav-icon icon-xs me-2"></i>  --}}
                     <i class="las la-home la-lg me-2"></i>
-                    Dashboard
+                    Inicio
                 </a>
             </li>
 

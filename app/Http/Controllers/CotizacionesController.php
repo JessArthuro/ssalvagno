@@ -12,6 +12,7 @@ use App\Models\Servicio;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class CotizacionesController extends Controller
 {
@@ -111,7 +112,7 @@ class CotizacionesController extends Controller
 
         $pdf = Pdf::loadView('quotes.pdf', compact('quote', 'serviceFoodsName'));
         $filename = "Cotizacion_" . $quote->num_cotizacion . ".pdf";
-        return $pdf->stream($filename);
+        return $pdf->download($filename);
     }
 
     public function excel(Request $request)

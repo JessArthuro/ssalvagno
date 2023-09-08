@@ -23,7 +23,6 @@ class CreateServiciosTable extends Migration
             $table->string('precio_unitario');
             $table->string('total');
             $table->string('costo_envio')->nullable();
-            // $table->json('huespedes_ids')->nullable();
             $table->timestamps();
         });
     }

@@ -15,8 +15,6 @@ class CreateHuespedesTable extends Migration
     {
         Schema::create('huespedes', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('servicio_id')->nullable();
-            // $table->foreign('servicio_id')->references('id')->on('servicios')->onUpdate('cascade')->onDelete('cascade');
             $table->string('nombre_h')->nullable();
             $table->string('desayunos')->nullable();
             $table->string('comidas')->nullable();

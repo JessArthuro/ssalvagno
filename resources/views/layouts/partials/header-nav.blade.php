@@ -1,6 +1,6 @@
-<div class="header @@classList">
+<div class="header @@classList mb-10">
     <!-- navbar -->
-    <nav class="navbar-classic navbar navbar-expand-lg">
+    <nav class="navbar-classic navbar navbar-expand-lg position-fixed w-100" style="z-index: 999">
         <a id="nav-toggle" href="#"><i data-feather="menu" class="nav-icon me-2 icon-sm"></i></a>
         <!--Navbar nav -->
         <ul class="navbar-nav navbar-right-wrap ms-auto d-flex nav-top-wrap">

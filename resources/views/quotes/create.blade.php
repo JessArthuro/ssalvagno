@@ -5,6 +5,10 @@
         .select2-container--bootstrap4 .select2-selection--multiple {
             min-height: calc(1.75em + 0.75rem + 2px) !important;
         }
+
+        input[readonly] {
+            background-color: #fff !important;
+        }
     </style>
 @endsection
 
@@ -13,19 +17,18 @@
         <form action="{{ route('quotes.store') }}" method="POST">
             @csrf
             {{-- Datos de la Cotizacion --}}
-            <div class="row mt-3 mb-5">
+            <div class="row mt-3">
                 <div class="col-12">
                     <h3 class="mb-4">Nueva Cotización</h3>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-lg-4 mb-6">
                     <div class="card">
                         <div class="card-body">
                             <div class="row g-3">
                                 <div class="col-12">
                                     <label for="date" class="form-label">Fecha</label>
-                                    <input name="fecha_cot" value="{{ date('Y-m-d') }}" type="date" class="form-control"
-                                        id="date">
+                                    <input name="fecha_cot" type="date" class="form-control" id="date">
                                 </div>
 
                                 <div class="col-12">
@@ -45,7 +48,7 @@
                 </div>
 
                 {{-- Informacion de Entrega  --}}
-                <div class="col-md-8">
+                <div class="col-lg-8 mb-6">
                     <div class="card">
                         <div class="card-body">
                             <div class="row g-3">
@@ -66,21 +69,24 @@
 
                                 <div class="col-md-4">
                                     <label for="deliveryDate" class="form-label">Fecha de Entrega</label>
-                                    <input name="fecha_ent" type="date" class="form-control" id="deliveryDate">
+                                    <input name="fecha_ent" type="date" class="form-control flatpickr_date"
+                                        id="deliveryDate" placeholder="dd/mm/aaaa">
                                 </div>
 
                                 <div class="col-md-4">
                                     <label for="deliveryTime" class="form-label">Hora de Entrega</label>
-                                    <input name="hora_ent" type="time" class="form-control" id="deliveryTime">
+                                    <input name="hora_ent" type="time" class="form-control" id="deliveryTime" placeholder="--:--">
                                 </div>
 
                                 <div class="col-md-4">
                                     <label for="departureDate" class="form-label">Fecha de Salida</label>
-                                    <input name="fecha_sal" type="date" class="form-control" id="departureDate">
+                                    <input name="fecha_sal" type="date" class="form-control flatpickr_date"
+                                        id="departureDate" placeholder="dd/mm/aaaa">
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="deliveryPlace" class="form-label">Lugar de Entrega</label>
+                                    <label for="deliveryPlace" class="form-label">Lugar de Entrega <small
+                                        class="text-muted">(Opcional)</small></label>
                                     <input name="lugar_ent" type="text" class="form-control" id="deliveryPlace">
                                 </div>
                             </div>
@@ -90,7 +96,7 @@
             </div>
 
             {{-- Datos del listado de Servicios  --}}
-            <div class="row mt-2">
+            <div class="row">
                 <div class="col-12">
                     <h3 class="mb-4">Servicios</h3>
                 </div>
@@ -121,6 +127,34 @@
 @section('js')
     <script>
         $(document).ready(function() {
+            flatpickr.localize(flatpickr.l10ns.es);
+            $('#date').flatpickr({
+                dateFormat: "y-m-d",
+                altInput: true,
+                altFormat: "d/m/Y",
+                defaultDate: "today",
+                locale: {
+                    firstDayOfWeek: 0
+                }
+            });
+
+            $('.flatpickr_date').flatpickr({
+                dateFormat: "y-m-d",
+                altInput: true,
+                altFormat: "d/m/Y",
+                locale: {
+                    firstDayOfWeek: 0
+                }
+            });
+
+            $('#deliveryTime').flatpickr({
+                enableTime: true,
+                noCalendar: true,
+                time_24hr: false,
+                defaultHour: "06",
+                minuteIncrement: 10
+            });
+
             let servicioIndex = 0;
 
             function agregarHuespedesSection(servicioIndex, cantidad) {
@@ -225,13 +259,13 @@
                                 <label class="form-label">No.</label>
                                 <input name="servicios[${servicioIndex}][servicio_id]" type="text" value="${servicioIndex}" class="form-control" readonly>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-6 col-lg-3">
                                 <label class="form-label">Fecha</label>
-                                <input name="servicios[${servicioIndex}][fecha_serv]" type="date" class="form-control">
+                                <input name="servicios[${servicioIndex}][fecha_serv]" type="date" class="form-control flatpickr_date_${servicioIndex}" placeholder="dd/mm/aaaa">
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-6 col-lg-5">
                                 <label for="service" class="form-label">Alimentos</label>
-                                <select name="servicios[${servicioIndex}][alimentos_ids][]" class="form-control" id="select_foods_${servicioIndex}" multiple>
+                                <select name="servicios[${servicioIndex}][alimentos_ids][]" class="form-control" id="select_foods_${servicioIndex}" multiple style="width: 100%">
                                     @foreach ($foods as $food)
                                         <option value="{{ $food->id }}" data-price="{{ $food->precio }}">
                                             {{ $food->nombre }}
@@ -239,27 +273,27 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-3"></div>
-                            <div class="col-md-2">
+                            <div class="d-none d-lg-block col-lg-3"></div>
+                            <div class="col-md-3 col-lg-2">
                                 <label class="form-label">Cantidad</label>
                                 <input name="servicios[${servicioIndex}][cantidad]" type="number" value="1" min="1"
                                     class="form-control" id="quantity_${servicioIndex}">
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3 col-lg-2">
                                 <label class="form-label">Precio Unitario</label>
                                 <input name="servicios[${servicioIndex}][precio_unitario]" type="text" 
                                     class="form-control" id="unitPrice_${servicioIndex}" readonly>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3 col-lg-2">
                                 <label class="form-label">Total</label>
                                 <input name="servicios[${servicioIndex}][total]" type="text" 
                                     class="form-control" id="total_${servicioIndex}">
                             </div>
-                            <div class="col-md-2" id="shippingCostContainer_${servicioIndex}">
+                            <div class="col-md-3 col-lg-2" id="shippingCostContainer_${servicioIndex}">
                                 <label class="form-label">Costo de Envío</label>
                                 <input name="servicios[${servicioIndex}][costo_envio]" type="text" class="form-control">
                             </div>
-                            <div class="col-md-4 d-grid align-items-end">
+                            <div class="col-md-5 col-lg-4 d-grid align-items-end">
                                 <button type="button" class="btn btn-outline-danger remove-servicio-btn"><i class="las la-minus"></i> Remover Servicio</button>
                             </div>
                         </div>
@@ -268,8 +302,8 @@
                             <caption>Lista de huespedes</caption>
                             <thead>
                                 <tr>
-                                    <th>Nombre de Huesped</th>
-                                    <th style="width: 400px;">Embarcación</th>
+                                    <th style="min-width: 300px">Nombre de Huesped</th>
+                                    <th style="max-width: 400px;">Embarcación</th>
                                     <th class="d-none" style="width: 100px;">Desayunos</th>
                                     <th class="d-none" style="width: 100px;">Comidas</th>
                                     <th class="d-none" style="width: 120px;">Cenas</th>
@@ -287,6 +321,7 @@
                 let currentServiceIndex = servicioIndex;
 
                 initializeSelect2(servicioIndex);
+                intializeDate(servicioIndex);
 
                 let cantidadInput = $(`input[name="servicios[${servicioIndex}][cantidad]"]`);
                 let cantidad = parseInt(cantidadInput.val());
@@ -314,6 +349,17 @@
                     allowClear: true,
                 }).on('change', function() {
                     updateUnitPriceAndTotal(id);
+                });
+            }
+
+            function intializeDate(id) {
+                $(`.flatpickr_date_${id}`).flatpickr({
+                    dateFormat: "y-m-d",
+                    altInput: true,
+                    altFormat: "d/m/Y",
+                    locale: {
+                        firstDayOfWeek: 0
+                    }
                 });
             }
 

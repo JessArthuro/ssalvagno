@@ -113,12 +113,14 @@
             @endphp
         @endforeach
 
-        <tr>
-            <td></td><td></td><td></td><td></td>
-            <td style="text-align: center; font-weight: bold;">Servicio de Entrega</td>
-            <td></td><td></td>
-            <td>${{ number_format($envio, 2) }}</td>                
-        </tr>
+        @if ($envio > 0)
+            <tr>
+                <td></td><td></td><td></td><td></td>
+                <td style="text-align: center; font-weight: bold;">Servicio de Entrega</td>
+                <td></td><td></td>
+                <td>${{ number_format($envio, 2) }}</td>                
+            </tr>
+        @endif
        
         <tr>
             <td></td><td></td><td></td><td></td>

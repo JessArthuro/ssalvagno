@@ -22,9 +22,9 @@ class CreateCotizacionesTable extends Migration
             $table->unsignedBigInteger('empresa_id');
             $table->foreign('empresa_id')->references('id')->on('empresas')->onUpdate('cascade')->onDelete('cascade');
             $table->date('fecha_ent');
-            $table->time('hora_ent');
+            $table->time('hora_ent')->nullable();
             $table->date('fecha_sal');
-            $table->string('lugar_ent', 100);
+            $table->string('lugar_ent', 100)->nullable();
             $table->timestamps();
         });
     }
